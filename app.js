@@ -28,7 +28,8 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
         .defaultIconSet('svg/core-icons.svg')
         .iconSet('device', 'svg/device-icons.svg')
-        .iconSet('navigation', 'svg/navigation-icons.svg');
+        .iconSet('navigation', 'svg/navigation-icons.svg')
+        .iconSet('content', 'svg/content-icons.svg');
 }]);
 
 app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $mdSidenav) {
@@ -153,5 +154,9 @@ app.controller('detailController', ['$scope', function ($scope) {
 
     $scope.toolbar = {
         'label': meal.name
+    };
+
+    $scope.backToMeals = function () {
+        window.location = window.location.href.split('#')[0] + '#/meals/add';
     };
 }]);
