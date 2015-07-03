@@ -1,0 +1,39 @@
+<div layout="column" flex>
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+                <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+            </md-button>
+            <h1 id="toolbarLabel" class="md-toolbar-tools">Hello World</h1>
+            <span flex></span>
+            <md-button ng-click="toggleOverflow()" class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="https://material.angularjs.org/latest/img/icons/more_vert.svg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <md-list>
+            <md-subheader class="md-no-sticky">Today</md-subheader>
+            <md-list-item ng-click="openMeal()" class="md-2-line" ng-repeat="meal in todayMeals">
+                <img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar" alt="" />
+                <div class="md-list-item-text">
+                    <h3>{{ meal.name }}</h3>
+                    <p>{{ meal.quantity + ' ' + meal.unit }} -- {{ meal.calories }}</p>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+            <md-subheader class="md-no-sticky">Yesterday</md-subheader>
+            <md-list-item ng-click="openMeal()" class="md-2-line" ng-repeat="meal in yesterdayMeals">
+                <img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar" alt="" />
+                <div class="md-list-item-text">
+                    <h3>{{ meal.name }}</h3>
+                    <p>{{ meal.quantity + ' ' + meal.unit }} -- {{ meal.calories }}</p>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+        </md-list>
+    </md-content>
+    <md-button class="md-primary md-fab md-fab-bottom-right" href="#/meals/add" id="#appFab">
+        FAB
+    </md-button>
+</div>

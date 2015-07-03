@@ -1,0 +1,30 @@
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+}
+
+.sidenav-header {
+  background-color: #C2185B;
+}
+
+.sidenav-header img {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.sidenav-header h1 {
+  margin-top: -10px;
+  color: #fff;
+  text-align: center;
+  font-weight: normal;
+}
+
+md-icon-button {
+  color: white;
+}
+
+.sidenav-list-item-icon {
+  font-size: 128px;
+}

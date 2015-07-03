@@ -1,0 +1,44 @@
+<html lang="en" ng-app="StarterApp">
+
+<head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="initial-scale=1" />
+</head>
+
+<body layout="row" ng-controller="defaultController">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" class="md-primary md-hue-2">
+        <div class="sidenav-header">
+            <img src="https://material.angularjs.org/latest/img/icons/angular-logo.svg" alt="logo" />
+            <h1>Daily Meal Journal</h1>
+        </div>
+        <md-list>
+            <md-list-item ng-click="navigateTo('data usage', $event)">
+                <md-icon md-svg-src="https://raw.githubusercontent.com/google/material-design-icons/master/navigation/svg/production/ic_apps_48px.svg" md-svg-icon="cached"></md-icon>
+                <p>My Journal</p>
+            </md-list-item>
+            <md-list-item ng-click="navigateTo('data usage', $event)">
+                <md-icon md-svg-icon="device:network-wifi"></md-icon>
+                <p>Meals</p>
+            </md-list-item>
+            <md-list-item ng-click="navigateTo('data usage', $event)">
+                <md-icon md-svg-icon="cached"></md-icon>
+                <p>About</p>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+    <md-content ng-view md-scroll-y flex></md-content>
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
