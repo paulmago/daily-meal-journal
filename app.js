@@ -26,8 +26,9 @@ app.config(function ($mdThemingProvider) {
 
 app.config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider
-        .defaultIconSet('https://material.angularjs.org/latest/img/icons/sets/core-icons.svg')
-        .iconSet('device', 'https://material.angularjs.org/latest/img/icons/sets/device-icons.svg');
+        .defaultIconSet('svg/core-icons.svg')
+        .iconSet('device', 'svg/device-icons.svg')
+        .iconSet('navigation', 'svg/navigation-icons.svg');
 }]);
 
 app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $mdSidenav) {
@@ -69,8 +70,6 @@ app.controller('listController', ['$scope', function ($scope) {
 }]);
 
 app.controller('addController', ['$scope', function ($scope) {
-    $('#toolbarLabel').html('Meals');
-
     $scope.breakfasts = [
         {
             'id': 1,
