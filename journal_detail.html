@@ -1,0 +1,34 @@
+<div layout="column" flex>
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="backToJournal()" class="md-icon-button">
+                <md-icon aria-label="Menu" md-svg-icon="navigation:arrow_back"></md-icon>
+            </md-button>
+            <h1 class="md-toolbar-tools">{{ ui.toolbarLabel }}</h1>
+            <span flex></span>
+            <md-button ng-click="deleteJournal($event)" class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="action:delete"></md-icon>
+            </md-button>
+            <md-button ng-click="updateJournal()" class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="action:done"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding layout-margin>
+        <md-input-container>
+            <label>Calories</label>
+            <input value="24 cal" type="text" disabled>
+        </md-input-container>
+        <form name="editJournal">
+            <md-input-container>
+                <label>Quantity</label>
+                <input type="number" name="quantity" pattern="[1-9]+" ng-model="asas.quantity" required>
+                <div ng-messages="editJournal.quantity.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="number">This must be a number</div>
+                    <div ng-message="pattern">This must be a positive integer</div>
+                </div>
+            </md-input-container>
+        </form>
+    </md-content>
+</div>
