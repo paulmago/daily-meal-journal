@@ -2,6 +2,7 @@
 var app = angular.module('StarterApp', ['ngMaterial', 'ngRoute', 'ngMessages']);
 
 app.config(['$routeProvider', function ($routeProvider) {
+    // user routes
     $routeProvider
         .when('/journal', {
             'templateUrl': 'list.html',
@@ -18,7 +19,21 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/meals/:mealId', {
             'templateUrl': 'meal_detail.html',
             'controller': 'mealDetailController'
+        });
+
+    // admin routes
+    $routeProvider
+        .when('/admin/meals', {
+            'templateUrl': 'admin/index.html',
+            'controller': 'adminMealsController'
         })
+        .when('/admin/meals/:mealId', {
+            'templateUrl': 'admin/meal_detail.html',
+            'controller': 'adminMealDetailController'
+        });
+
+    // the only invalid route -> because no one's perfect :)
+    $routeProvider
         .otherwise({
             'redirectTo': '/journal'
         });
@@ -51,6 +66,100 @@ app.filter('underscoreToHuman', function () {
     }
 });
 
+// admin controllers
+app.controller('adminMealsController', ['$scope', function ($scope) {
+    $scope.meals = [
+        {
+            'id': 1,
+            'name': 'Porkchop with Monggos',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 2
+        },
+        {
+            'id': 1,
+            'name': 'Bihon with kape',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 4
+        },
+        {
+            'id': 1,
+            'name': 'Beefsteak with Siomai',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 1
+        },
+        {
+            'id': 1,
+            'name': 'Nilat.ang baki with lettuce',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 3
+        },
+        {
+            'id': 1,
+            'name': 'Porkchop with Monggos',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 2
+        },
+        {
+            'id': 1,
+            'name': 'Bihon with kape',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 4
+        },
+        {
+            'id': 1,
+            'name': 'Beefsteak with Siomai',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 1
+        },
+        {
+            'id': 1,
+            'name': 'Nilat.ang baki with lettuce',
+            'calories': '23',
+            'unit': 'serving(s)',
+            'quantity': 3
+        }
+    ];
+
+    $scope.searchBoxHidden = true;
+    $scope.searchMeals = function () {
+        $scope.searchBoxHidden = !$scope.searchBoxHidden;
+    };
+
+    $scope.openMeal = function (meal) {
+        window.location = window.location.href.split('#')[0] + '#/admin/meals/' + meal.id;
+    };
+}]);
+
+app.controller('adminMealDetailController', ['$scope', '$routeParams', function ($scope, $routeParams) {
+    var meal = {
+        'id': 1,
+        'name': 'Porkchop with Monggos',
+        'calories': '23 cal',
+        'unit': 'serving(s)',
+        'quantity': 2
+    };
+
+    $scope.ui = {
+        'toolbarLabel': meal.name
+    };
+
+    $scope.backToMeals = function () {
+        window.location = window.location.href.split('#')[0] + '#/admin/meals';
+    };
+
+    $scope.updateMeal = function () {
+        window.location = window.location.href.split('#')[0] + '#/admin/meals';
+    };
+}]);
+
+// user controllers 
 app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $mdSidenav, $mdDialog) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
@@ -59,7 +168,6 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
         window.location = window.location.href.split('#')[0] + '#' + where;
     };
 }]);
-
 app.controller('journalController', ['$scope', function ($scope) {
     // reserve date 1438617600000
     var meals = [
@@ -160,7 +268,6 @@ app.controller('journalController', ['$scope', function ($scope) {
         } */
     };
 }]);
-
 app.controller('mealsController', ['$scope', function ($scope) {
     $scope.meals = [
         {
@@ -233,7 +340,6 @@ app.controller('mealsController', ['$scope', function ($scope) {
         } */
     };
 }]);
-
 app.controller('mealDetailController', ['$scope', function ($scope) {
     var meal = {
         'id': 1,
@@ -278,7 +384,6 @@ app.controller('mealDetailController', ['$scope', function ($scope) {
         window.location = window.location.href.split('#')[0] + '#/journal';
     };
 }]);
-
 app.controller('journalDetailController', ['$scope', '$mdDialog', '$mdToast', function ($scope, $mdDialog, $mdToast) {
     var journal = {
         'id': 1,
