@@ -60,7 +60,7 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
     };
 }]);
 
-app.controller('journalController', ['$scope', '$mdDialog', function ($scope, $mdDialog, $event) {
+app.controller('journalController', ['$scope', function ($scope) {
     // reserve date 1438617600000
     var meals = [
         {
@@ -144,27 +144,8 @@ app.controller('journalController', ['$scope', '$mdDialog', function ($scope, $m
         grandTotal += meals[i].calories;
     }
 
-    if (grandTotal > 2000) {
-        // dialog or toast ! whatever
-        // if dialog
-        $mdDialog.show(
-            $mdDialog.alert()
-            .parent(angular.element(document.body))
-            .title('Calorie count exceeds 2000!')
-            .content('You seriously need to stop eating. You\'re too fat already.')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Okay!')
-            .targetEvent($event)
-        );
-        // if toast -> be sure to inject $mdToast
-        /*$mdToast.show(
-            $mdToast.simple()
-            .content('You seriously need to stop eating. You\'re too fat already.')
-            .hideDelay(1000)
-        );*/
-    }
-
-    $scope.meals = objects;
+    $scope.rawMeals = meals;
+    $scope.groupedMeals = objects;
     $scope.totals = totals;
 
     $scope.openJournal = function (journal) {
@@ -271,6 +252,31 @@ app.controller('mealDetailController', ['$scope', function ($scope) {
     $scope.backToMeals = function () {
         window.location = window.location.href.split('#')[0] + '#/meals';
     };
+
+    // this functions adds the current meal to the user's journal
+    $scope.addJournal = function () {
+        // check the current total calories + this meal's calories
+        // if it's greater than 2000 show a dialog
+        /*if (grandTotal > 2000) {
+            // dialog or toast ! whatever
+            // if dialog
+            $mdDialog.show(
+                $mdDialog.alert()
+                .parent(angular.element(document.body))
+                .title('Calorie count exceeds 2000!')
+                .content('You seriously need to stop eating. You\'re too fat already.')
+                .ariaLabel('Alert Dialog Demo')
+                .ok('Okay!')
+                .targetEvent($event)
+            );
+        }*/
+        // check if this meal is the eleventh meal
+        // if it is, show a dialog showing 'nilapas na 10 imo meal okie ?'
+        // TODO : put it here
+
+        // redirect the user back to its journal
+        window.location = window.location.href.split('#')[0] + '#/journal';
+    };
 }]);
 
 app.controller('journalDetailController', ['$scope', '$mdDialog', '$mdToast', function ($scope, $mdDialog, $mdToast) {
@@ -313,7 +319,7 @@ app.controller('journalDetailController', ['$scope', '$mdDialog', '$mdToast', fu
         // update logic here
         $mdToast.show(
             $mdToast.simple()
-            .content('Simple Toast!')
+            .content('Journal Updated!')
             .hideDelay(1000)
         );
         window.location = window.location.href.split('#')[0] + '#/journal';
