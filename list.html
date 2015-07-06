@@ -27,10 +27,10 @@
             <md-subheader ng-repeat-start="(key, value) in groupedMeals">{{ key | underscoreToHuman }}<span style="float: right;">{{ totals[key] }} calorie(s)</span>
             </md-subheader>
             <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in value">
-                <img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar" alt="" />
+                <img ng-src="{{ meal.imageUrl }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text">
                     <h3>{{ meal.name }}</h3>
-                    <p>{{ meal.quantity + ' ' + meal.unit + ' -- ' + meal.calories }} calories</p>
+                    <p>acquired {{ meal.quantity * meal.calories }} calories</p>
                 </div>
             </md-list-item>
             <md-divider ng-repeat-end></md-divider>
@@ -39,10 +39,10 @@
         <md-list ng-show="!searchBoxHidden && search.length">
             <md-subheader>Search Results</md-subheader>
             <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in filteredMeals=(rawMeals | filter:search)">
-                <img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar" alt="" />
+                <img ng-src="{{ meal.imageUrl }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text">
                     <h3>{{ meal.name }}</h3>
-                    <p>{{ meal.quantity + ' ' + meal.unit + ' -- ' + meal.calories }} calories</p>
+                    <p>{{ meal.calories }} calories per {{ meal.defaultQuantity + ' ' + meal.unit }}</p>
                 </div>
             </md-list-item>
             <md-list-item ng-hide="filteredMeals.length">

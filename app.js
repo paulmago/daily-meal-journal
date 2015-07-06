@@ -67,7 +67,7 @@ app.filter('underscoreToHuman', function () {
 });
 
 // admin controllers
-app.controller('adminMealsController', ['$scope', function ($scope) {
+app.controller('adminMealsController', ['$scope', '$http', function ($scope, $http) {
     $http
         .get('test/meals.json')
         .success(function (response) {
@@ -215,7 +215,7 @@ app.controller('journalController', ['$scope', '$http', function ($scope, $http)
                     }
 
                     objects.today.push(meals[i]);
-                    totals.today += meals[i].calories;
+                    totals.today += meals[i].calories * meals[i].quantity;
                 } else if (meals[i].dateCreated >= timestampYesterday) {
                     if (!objects.hasOwnProperty('yesterday')) {
                         objects.yesterday = [];
@@ -223,7 +223,7 @@ app.controller('journalController', ['$scope', '$http', function ($scope, $http)
                     }
 
                     objects.yesterday.push(meals[i]);
-                    totals.yesterday += meals[i].calories;
+                    totals.yesterday += meals[i].calories * meals[i].quantity;
                 } else if (meals[i].dateCreated >= timestampThisWeek) {
                     if (!objects.hasOwnProperty('this_week')) {
                         objects.this_week = [];
@@ -231,7 +231,7 @@ app.controller('journalController', ['$scope', '$http', function ($scope, $http)
                     }
 
                     objects.this_week.push(meals[i]);
-                    totals.this_week += meals[i].calories;
+                    totals.this_week += meals[i].calories * meals[i].quantity;
                 } else {
                     if (!objects.hasOwnProperty('others')) {
                         objects.others = [];
@@ -239,7 +239,7 @@ app.controller('journalController', ['$scope', '$http', function ($scope, $http)
                     }
 
                     objects.others.push(meals[i]);
-                    totals.others += meals[i].calories;
+                    totals.others += meals[i].calories * meals[i].quantity;
                 }
                 grandTotal += meals[i].calories;
             }

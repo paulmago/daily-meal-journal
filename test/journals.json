@@ -4,7 +4,7 @@
             "name": "Rice",
             "unit": "cup",
             "calories": 205,
-            "imageUrl": "",
+            "imageUrl": "images/rice.jpg",
             "dateCreated": 1436154582626,
             "quantity": 1
         },
@@ -12,7 +12,7 @@
             "name": "Hard Boiled Egg",
             "unit": "whole large",
             "calories": 78,
-            "imageUrl": "",
+            "imageUrl": "images/hard_boiled_eggs.jpg",
             "dateCreated": 1436025600000,
             "quantity": 2
         },
@@ -20,7 +20,7 @@
             "name": "Pizza",
             "unit": "slice",
             "calories": 285,
-            "imageUrl": "",
+            "imageUrl": "images/pizza.jpg",
             "dateCreated": 1436025600000,
             "quantity": 2
         },
@@ -28,7 +28,7 @@
             "name": "Juice",
             "unit": "cup",
             "calories": 46,
-            "imageUrl": "",
+            "imageUrl": "images/juice.jpg",
             "dateCreated": 1436154582626,
             "quantity": 2
         },
@@ -36,7 +36,7 @@
             "name": "Shrimp",
             "unit": "100 grams",
             "calories": 99,
-            "imageUrl": "",
+            "imageUrl": "images/shrimp.jpg",
             "dateCreated": 1407168000000,
             "quantity": 2
         }

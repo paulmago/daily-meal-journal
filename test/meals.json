@@ -6,7 +6,7 @@
             "defaultQuantity": "1",
             "unit": "cup",
             "calories": "205",
-            "imageUrl": ""
+            "imageUrl": "images/rice.jpg"
         },
         {
             "name": "Hard Boiled Egg",
@@ -14,7 +14,7 @@
             "defaultQuantity": "1",
             "unit": "whole large",
             "calories": "78",
-            "imageUrl": ""
+            "imageUrl": "images/hard_boiled_eggs.jpg"
         },
         {
             "name": "Pizza",
@@ -22,7 +22,7 @@
             "defaultQuantity": "1",
             "unit": "slice",
             "calories": "285",
-            "imageUrl": ""
+            "imageUrl": "images/pizza.jpg"
         },
         {
             "name": "Juice",
@@ -30,7 +30,7 @@
             "defaultQuantity": "1",
             "unit": "cup",
             "calories": "46",
-            "imageUrl": ""
+            "imageUrl": "images/juice.jpg"
         },
         {
             "name": "Shrimp",
@@ -38,7 +38,7 @@
             "defaultQuantity": "1",
             "unit": "100 grams",
             "calories": "99",
-            "imageUrl": ""
+            "imageUrl": "images/shrimp.jpg"
         },
         {
             "name": "Vegetable Salad",
@@ -46,7 +46,7 @@
             "defaultQuantity": "1",
             "unit": "1.5 cup",
             "calories": "33",
-            "imageUrl": ""
+            "imageUrl": "images/vegetable_salad.jpg"
         },
         {
             "name": "Chicken Drumstick",
@@ -54,7 +54,7 @@
             "defaultQuantity": "1",
             "unit": "drumstick",
             "calories": "211",
-            "imageUrl": ""
+            "imageUrl": "images/chicken_drumsticks.jpg"
         },
         {
             "name": "Ice cream",
@@ -62,7 +62,7 @@
             "defaultQuantity": "1",
             "unit": "100 grams",
             "calories": "207",
-            "imageUrl": ""
+            "imageUrl": "images/icecream.jpg"
         },
         {
             "name": "Hotdog",
@@ -70,7 +70,7 @@
             "defaultQuantity": "1",
             "unit": "hotdog",
             "calories": "151",
-            "imageUrl": ""
+            "imageUrl": "images/hotdog.jpg"
         },
         {
             "name": "Bread",
@@ -78,7 +78,7 @@
             "defaultQuantity": "1",
             "unit": "slice",
             "calories": "74",
-            "imageUrl": ""
+            "imageUrl": "images/bread.jpg"
         }
     ]
 }
