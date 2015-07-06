@@ -68,64 +68,11 @@ app.filter('underscoreToHuman', function () {
 
 // admin controllers
 app.controller('adminMealsController', ['$scope', function ($scope) {
-    $scope.meals = [
-        {
-            'id': 1,
-            'name': 'Porkchop with Monggos',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 2
-        },
-        {
-            'id': 1,
-            'name': 'Bihon with kape',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 4
-        },
-        {
-            'id': 1,
-            'name': 'Beefsteak with Siomai',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 1
-        },
-        {
-            'id': 1,
-            'name': 'Nilat.ang baki with lettuce',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 3
-        },
-        {
-            'id': 1,
-            'name': 'Porkchop with Monggos',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 2
-        },
-        {
-            'id': 1,
-            'name': 'Bihon with kape',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 4
-        },
-        {
-            'id': 1,
-            'name': 'Beefsteak with Siomai',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 1
-        },
-        {
-            'id': 1,
-            'name': 'Nilat.ang baki with lettuce',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 3
-        }
-    ];
+    $http
+        .get('test/meals.json')
+        .success(function (response) {
+            $scope.meals = response.meals;
+        });
 
     $scope.searchBoxHidden = true;
     $scope.searchMeals = function () {
@@ -159,7 +106,12 @@ app.controller('adminMealDetailController', ['$scope', '$routeParams', function 
     };
 }]);
 
-// user controllers 
+
+/*********************
+ ** USER controllers
+ **********************/
+
+// base file controller
 app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $mdSidenav, $mdDialog) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
@@ -168,165 +120,14 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
         window.location = window.location.href.split('#')[0] + '#' + where;
     };
 }]);
-app.controller('journalController', ['$scope', function ($scope) {
-    // reserve date 1438617600000
-    var meals = [
-        {
-            'id': 1,
-            'name': 'Porkchop with Monggos',
-            'calories': 23,
-            'unit': 'serving(s)',
-            'quantity': 2,
-            'dateCreated': 1435075200000
-        },
-        {
-            'id': 2,
-            'name': 'Bihon with kape',
-            'calories': 23,
-            'unit': 'serving(s)',
-            'quantity': 4,
-            'dateCreated': 1437926400000
-        },
-        {
-            'id': 3,
-            'name': 'Beefsteak with Siomai',
-            'calories': 23,
-            'unit': 'serving(s)',
-            'quantity': 1,
-            'dateCreated': 1432396800000
-        },
-        {
-            'id': 4,
-            'name': 'Nilat.ang baki with lettuce',
-            'calories': 23,
-            'unit': 'serving(s)',
-            'quantity': 3,
-            'dateCreated': 1438012800000
-        }
-    ];
 
-    var now = new Date();
-    var timestampToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    var timestampYesterday = timestampToday - 86400000;
-    var temp = new Date(now.setDate(now.getDate() - now.getDay()));
-    var timestampThisWeek = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
-
-    var objects = {};
-    var totals = {};
-    var grandTotal = 0;
-
-    for (var i = 0; i < meals.length; i++) {
-        if (meals[i].dateCreated >= timestampToday) {
-            if (!objects.hasOwnProperty('today')) {
-                objects.today = [];
-                totals.today = 0;
-            }
-
-            objects.today.push(meals[i]);
-            totals.today += meals[i].calories;
-        } else if (meals[i].dateCreated >= timestampYesterday) {
-            if (!objects.hasOwnProperty('yesterday')) {
-                objects.yesterday = [];
-                totals.yesterday = 0;
-            }
-
-            objects.yesterday.push(meals[i]);
-            totals.yesterday += meals[i].calories;
-        } else if (meals[i].dateCreated >= timestampThisWeek) {
-            if (!objects.hasOwnProperty('this_week')) {
-                objects.this_week = [];
-                totals.this_week = 0;
-            }
-
-            objects.this_week.push(meals[i]);
-            totals.this_week += meals[i].calories;
-        } else {
-            if (!objects.hasOwnProperty('others')) {
-                objects.others = [];
-                totals.others = 0;
-            }
-
-            objects.others.push(meals[i]);
-            totals.others += meals[i].calories;
-        }
-        grandTotal += meals[i].calories;
-    }
-
-    $scope.rawMeals = meals;
-    $scope.groupedMeals = objects;
-    $scope.totals = totals;
-
-    $scope.openJournal = function (journal) {
-        window.location = window.location.href.split('#')[0] + '#/journal/' + journal.id;
-    };
-
-    $scope.searchBoxHidden = true;
-    $scope.searchJournal = function () {
-        $scope.searchBoxHidden = !$scope.searchBoxHidden;
-        /* if (!$scope.searchBoxHidden) {
-            document.getElementById('search-box').focus();
-        } */
-    };
-}]);
-app.controller('mealsController', ['$scope', function ($scope) {
-    $scope.meals = [
-        {
-            'id': 1,
-            'name': 'Porkchop with Monggos',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 2
-        },
-        {
-            'id': 1,
-            'name': 'Bihon with kape',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 4
-        },
-        {
-            'id': 1,
-            'name': 'Beefsteak with Siomai',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 1
-        },
-        {
-            'id': 1,
-            'name': 'Nilat.ang baki with lettuce',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 3
-        },
-        {
-            'id': 1,
-            'name': 'Porkchop with Monggos',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 2
-        },
-        {
-            'id': 1,
-            'name': 'Bihon with kape',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 4
-        },
-        {
-            'id': 1,
-            'name': 'Beefsteak with Siomai',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 1
-        },
-        {
-            'id': 1,
-            'name': 'Nilat.ang baki with lettuce',
-            'calories': '23',
-            'unit': 'serving(s)',
-            'quantity': 3
-        }
-    ];
+// meals list controller
+app.controller('mealsController', ['$scope', '$http', function ($scope, $http) {
+    $http
+        .get('test/meals.json')
+        .success(function (response) {
+            $scope.meals = response.meals;
+        });
 
     $scope.openMeal = function (meal) {
         window.location = window.location.href.split('#')[0] + '#/meals/' + meal.id;
@@ -340,6 +141,8 @@ app.controller('mealsController', ['$scope', function ($scope) {
         } */
     };
 }]);
+
+// meal detail (also used to add )
 app.controller('mealDetailController', ['$scope', function ($scope) {
     var meal = {
         'id': 1,
@@ -384,6 +187,82 @@ app.controller('mealDetailController', ['$scope', function ($scope) {
         window.location = window.location.href.split('#')[0] + '#/journal';
     };
 }]);
+
+// user's journal controller
+app.controller('journalController', ['$scope', '$http', function ($scope, $http) {
+    // getting journals
+    $http
+        .get('test/journals.json')
+        .success(function (response) {
+            var meals = response.journals;
+
+            // get timestamps for related dates to compare against journal data
+            var now = new Date();
+            var timestampToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+            var timestampYesterday = timestampToday - 86400000;
+            var temp = new Date(now.setDate(now.getDate() - now.getDay()));
+            var timestampThisWeek = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
+
+            var objects = {};
+            var totals = {};
+            var grandTotal = 0;
+
+            for (var i = 0; i < meals.length; i++) {
+                if (meals[i].dateCreated >= timestampToday) {
+                    if (!objects.hasOwnProperty('today')) {
+                        objects.today = [];
+                        totals.today = 0;
+                    }
+
+                    objects.today.push(meals[i]);
+                    totals.today += meals[i].calories;
+                } else if (meals[i].dateCreated >= timestampYesterday) {
+                    if (!objects.hasOwnProperty('yesterday')) {
+                        objects.yesterday = [];
+                        totals.yesterday = 0;
+                    }
+
+                    objects.yesterday.push(meals[i]);
+                    totals.yesterday += meals[i].calories;
+                } else if (meals[i].dateCreated >= timestampThisWeek) {
+                    if (!objects.hasOwnProperty('this_week')) {
+                        objects.this_week = [];
+                        totals.this_week = 0;
+                    }
+
+                    objects.this_week.push(meals[i]);
+                    totals.this_week += meals[i].calories;
+                } else {
+                    if (!objects.hasOwnProperty('others')) {
+                        objects.others = [];
+                        totals.others = 0;
+                    }
+
+                    objects.others.push(meals[i]);
+                    totals.others += meals[i].calories;
+                }
+                grandTotal += meals[i].calories;
+            }
+
+            $scope.rawMeals = meals;
+            $scope.groupedMeals = objects;
+            $scope.totals = totals;
+        });
+
+    $scope.openJournal = function (journal) {
+        window.location = window.location.href.split('#')[0] + '#/journal/' + journal.id;
+    };
+
+    $scope.searchBoxHidden = true;
+    $scope.searchJournal = function () {
+        $scope.searchBoxHidden = !$scope.searchBoxHidden;
+        /* if (!$scope.searchBoxHidden) {
+            document.getElementById('search-box').focus();
+        } */
+    };
+}]);
+
+// user's journal detail controller
 app.controller('journalDetailController', ['$scope', '$mdDialog', '$mdToast', function ($scope, $mdDialog, $mdToast) {
     var journal = {
         'id': 1,

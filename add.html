@@ -25,7 +25,7 @@
             <img ng-src="https://material.angularjs.org/latest/img/list/60.jpeg?0" class="md-avatar" alt="" />
             <div class="md-list-item-text">
                 <h3>{{ meal.name }}</h3>
-                <p>{{ meal.quantity + ' ' + meal.unit }} -- {{ meal.calories }}</p>
+                <p>{{ meal.defaultQuantity + ' ' + meal.unit }} -- {{ meal.calories }} calories</p>
             </div>
         </md-list-item>
         <md-list-item ng-hide="filteredMeals.length">

@@ -1,0 +1,84 @@
+{
+    "meals": [
+        {
+            "name": "Rice",
+            "id": "1",
+            "defaultQuantity": "1",
+            "unit": "cup",
+            "calories": "205",
+            "imageUrl": ""
+        },
+        {
+            "name": "Hard Boiled Egg",
+            "id": "2",
+            "defaultQuantity": "1",
+            "unit": "whole large",
+            "calories": "78",
+            "imageUrl": ""
+        },
+        {
+            "name": "Pizza",
+            "id": "3",
+            "defaultQuantity": "1",
+            "unit": "slice",
+            "calories": "285",
+            "imageUrl": ""
+        },
+        {
+            "name": "Juice",
+            "id": "4",
+            "defaultQuantity": "1",
+            "unit": "cup",
+            "calories": "46",
+            "imageUrl": ""
+        },
+        {
+            "name": "Shrimp",
+            "id": "5",
+            "defaultQuantity": "1",
+            "unit": "100 grams",
+            "calories": "99",
+            "imageUrl": ""
+        },
+        {
+            "name": "Vegetable Salad",
+            "id": "6",
+            "defaultQuantity": "1",
+            "unit": "1.5 cup",
+            "calories": "33",
+            "imageUrl": ""
+        },
+        {
+            "name": "Chicken Drumstick",
+            "id": "7",
+            "defaultQuantity": "1",
+            "unit": "drumstick",
+            "calories": "211",
+            "imageUrl": ""
+        },
+        {
+            "name": "Ice cream",
+            "id": "8",
+            "defaultQuantity": "1",
+            "unit": "100 grams",
+            "calories": "207",
+            "imageUrl": ""
+        },
+        {
+            "name": "Hotdog",
+            "id": "9",
+            "defaultQuantity": "1",
+            "unit": "hotdog",
+            "calories": "151",
+            "imageUrl": ""
+        },
+        {
+            "name": "Bread",
+            "id": "10",
+            "defaultQuantity": "1",
+            "unit": "slice",
+            "calories": "74",
+            "imageUrl": ""
+        }
+    ]
+}
