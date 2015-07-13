@@ -41,3 +41,10 @@
     margin-top: -10%;
     width: 100%;
 }
+
+.subheader {
+    text-align: center;
+    color: #ccc;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
