@@ -6,7 +6,8 @@
             "defaultQuantity": "1",
             "unit": "cup",
             "calories": "205",
-            "imageUrl": "images/rice.jpg"
+            "iconUrl": "meals-icons/rice.jpg",
+            "imageUrl": "meals-images/rice.jpg"
         },
         {
             "name": "Hard Boiled Egg",
@@ -14,7 +15,8 @@
             "defaultQuantity": "1",
             "unit": "whole large",
             "calories": "78",
-            "imageUrl": "images/hard_boiled_eggs.jpg"
+            "iconUrl": "meals-icons/hard-boiled-eggs.jpg",
+            "imageUrl": "meals-images/hard-boiled-eggs.jpg"
         },
         {
             "name": "Pizza",
@@ -22,7 +24,8 @@
             "defaultQuantity": "1",
             "unit": "slice",
             "calories": "285",
-            "imageUrl": "images/pizza.jpg"
+            "iconUrl": "meals-icons/pizza.jpg",
+            "imageUrl": "meals-images/pizza.jpg"
         },
         {
             "name": "Juice",
@@ -30,7 +33,8 @@
             "defaultQuantity": "1",
             "unit": "cup",
             "calories": "46",
-            "imageUrl": "images/juice.jpg"
+            "iconUrl": "meals-icons/juice.jpg",
+            "imageUrl": "meals-images/juice.jpg"
         },
         {
             "name": "Shrimp",
@@ -38,7 +42,8 @@
             "defaultQuantity": "1",
             "unit": "100 grams",
             "calories": "99",
-            "imageUrl": "images/shrimp.jpg"
+            "iconUrl": "meals-icons/shrimp.jpg",
+            "imageUrl": "meals-images/shrimp.jpg"
         },
         {
             "name": "Vegetable Salad",
@@ -46,7 +51,8 @@
             "defaultQuantity": "1",
             "unit": "1.5 cup",
             "calories": "33",
-            "imageUrl": "images/vegetable_salad.jpg"
+            "iconUrl": "meals-icons/vegetable-salad.jpg",
+            "imageUrl": "meals-images/vegetable-salad.jpg"
         },
         {
             "name": "Chicken Drumstick",
@@ -54,7 +60,8 @@
             "defaultQuantity": "1",
             "unit": "drumstick",
             "calories": "211",
-            "imageUrl": "images/chicken_drumsticks.jpg"
+            "iconUrl": "meals-icons/chicken-drumsticks.jpg",
+            "imageUrl": "meals-images/chicken-drumsticks.jpg"
         },
         {
             "name": "Ice cream",
@@ -62,7 +69,8 @@
             "defaultQuantity": "1",
             "unit": "100 grams",
             "calories": "207",
-            "imageUrl": "images/icecream.jpg"
+            "iconUrl": "meals-icons/icecream.jpg",
+            "imageUrl": "meals-images/icecream.jpg"
         },
         {
             "name": "Hotdog",
@@ -70,7 +78,8 @@
             "defaultQuantity": "1",
             "unit": "hotdog",
             "calories": "151",
-            "imageUrl": "images/hotdog.jpg"
+            "iconUrl": "meals-icons/hotdog.jpg",
+            "imageUrl": "meals-images/hotdog.jpg"
         },
         {
             "name": "Bread",
@@ -78,7 +87,8 @@
             "defaultQuantity": "1",
             "unit": "slice",
             "calories": "74",
-            "imageUrl": "images/bread.jpg"
+            "iconUrl": "meals-icons/bread.jpg",
+            "imageUrl": "meals-images/bread.jpg"
         }
     ]
 }

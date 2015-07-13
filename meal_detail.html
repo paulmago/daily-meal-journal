@@ -11,18 +11,26 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-content layout-padding layout-margin>
-        <p>Unit: {{ journal.unit }}</p>
-        <p>Calories: {{ journal.calories }}</p>
+
+    <div class="below-toolbar-img">
+        <img src="meals-images/juice.jpg">
+    </div>
+
+    <md-content layout-padding class="autoScroll padding-big">
         <form name="addMealForm">
-            <md-input-container>
-                <label>Enter Quantity</label>
-                <input type="number" name="quantity" pattern="[1-9]+" ng-model="addMeal.quantity" required>
-                <div ng-messages="addMealForm.quantity.$error">
-                    <div ng-message="required">This is required.</div>
-                    <div ng-message="number">This must be a number</div>
-                    <div ng-message="pattern">This must be a positive integer</div>
-                </div>
+            <md-input-container class="md-icon-float">
+                <label>Unit</label>
+                <md-icon md-svg-icon="image:texture" class="calories"></md-icon>
+                <input ng-model="currentMeal.unit" disabled>
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <label>Calories</label>
+                <md-icon md-svg-src="svg/health-clinic2.svg" class="calories"></md-icon>
+                <input ng-model="currentMeal.calories" disabled>
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <md-icon md-svg-icon="content:add_circle" class="quantity"></md-icon>
+                <input type="number" name="quantity" pattern="[1-9]+" ng-model="asas.quantity" ng-required="true" placeholder="Quantity (required)">
             </md-input-container>
         </form>
     </md-content>

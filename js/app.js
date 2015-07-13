@@ -53,6 +53,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         .iconSet('navigation', 'svg/navigation-icons.svg')
         .iconSet('content', 'svg/content-icons.svg')
         .iconSet('alert', 'svg/alert-icons.svg')
+        .iconSet('image', 'svg/image-icons.svg')
         .defaultIconSet('svg/core-icons.svg');
 }]);
 
@@ -250,7 +251,8 @@ app.controller('journalController', ['$scope', '$http', function ($scope, $http)
         });
 
     $scope.openJournal = function (journal) {
-        window.location = window.location.href.split('#')[0] + '#/journal/' + journal.id;
+        // window.location = window.location.href.split('#')[0] + '#/journal/' + journal.id;
+        window.location = window.location.href.split('#')[0] + '#/journal/1';
     };
 
     $scope.searchBoxHidden = true;
