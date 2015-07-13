@@ -22,6 +22,11 @@
     <md-content layout-padding class="autoScroll padding-big">
         <form name="editJournal">
             <md-input-container class="md-icon-float">
+                <label>Unit</label>
+                <md-icon md-svg-icon="image:texture" class="unit"></md-icon>
+                <input ng-model="unit" disabled>
+            </md-input-container>
+            <md-input-container class="md-icon-float">
                 <label>Calories</label>
                 <md-icon md-svg-src="svg/health-clinic2.svg" class="calories"></md-icon>
                 <input ng-model="calories" disabled>

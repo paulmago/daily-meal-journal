@@ -21,16 +21,20 @@
             <md-input-container class="md-icon-float">
                 <label>Unit</label>
                 <md-icon md-svg-icon="image:texture" class="calories"></md-icon>
-                <input ng-model="currentMeal.unit" disabled>
+                <input ng-model="unit" disabled>
             </md-input-container>
             <md-input-container class="md-icon-float">
                 <label>Calories</label>
                 <md-icon md-svg-src="svg/health-clinic2.svg" class="calories"></md-icon>
-                <input ng-model="currentMeal.calories" disabled>
+                <input ng-model="calories" disabled>
             </md-input-container>
             <md-input-container class="md-icon-float">
                 <md-icon md-svg-icon="content:add_circle" class="quantity"></md-icon>
-                <input type="number" name="quantity" pattern="[1-9]+" ng-model="asas.quantity" ng-required="true" placeholder="Quantity (required)">
+                <input type="text" name="quantity" pattern="[1-9]+" ng-model="quantity" ng-change="updateCalories()" placeholder="Quantity (required)" required>
+                <div ng-messages="addMealForm.quantity.$error">
+                    <div ng-message="required">This is <b>required</b>.</div>
+                    <div ng-message="pattern">This should be a positive integer.</div>
+                </div>
             </md-input-container>
         </form>
     </md-content>

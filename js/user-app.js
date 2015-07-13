@@ -88,19 +88,46 @@ app.controller('mealsController', ['$scope', '$http', function ($scope, $http) {
 }]);
 
 // meal detail (also used to add )
-app.controller('mealDetailController', ['$scope', function ($scope) {
+app.controller('mealDetailController', ['$scope', '$mdDialog', '$mdToast', function ($scope, $mdDialog, $mdToast) {
     var meal = {
-        'id': 1,
-        'name': 'Porkchop with Monggos',
-        'calories': '23 cal',
-        'unit': 'serving(s)',
-        'quantity': 2
+        "name": "Pizza",
+        "id": "3",
+        "defaultQuantity": "1",
+        "unit": "slice",
+        "calories": "285",
+        "iconUrl": "meals-icons/pizza.jpg",
+        "imageUrl": "meals-images/pizza.jpg"
     };
 
     $scope.currentMeal = meal;
 
+    $scope.unit = meal.unit;
+    $scope.calories = meal.calories;
+    $scope.quantity = meal.quantity;
+
+    $scope.updateCalories = function () {
+        if ($scope.addMealForm.quantity.$valid) {
+            $scope.calories = $scope.quantity * meal.calories;
+        }
+    };
+
     $scope.ui = {
         'toolbarLabel': meal.name
+    };
+
+    // helper stuffs
+    $scope.toastPosition = {
+        bottom: true,
+        top: false,
+        left: false,
+        right: true
+    };
+    $scope.getToastPosition = function () {
+        return Object.keys($scope.toastPosition)
+            .filter(function (pos) {
+                return $scope.toastPosition[pos];
+            })
+            .join(' ');
     };
 
     $scope.backToMeals = function () {
@@ -108,28 +135,36 @@ app.controller('mealDetailController', ['$scope', function ($scope) {
     };
 
     // this functions adds the current meal to the user's journal
-    $scope.addJournal = function () {
-        // check the current total calories + this meal's calories
-        // if it's greater than 2000 show a dialog
-        /*if (grandTotal > 2000) {
-            // dialog or toast ! whatever
-            // if dialog
-            $mdDialog.show(
-                $mdDialog.alert()
-                .parent(angular.element(document.body))
-                .title('Calorie count exceeds 2000!')
-                .content('You seriously need to stop eating. You\'re too fat already.')
-                .ariaLabel('Alert Dialog Demo')
-                .ok('Okay!')
-                .targetEvent($event)
+    $scope.addJournal = function (ev) {
+        if ($scope.addMealForm.$valid) {
+            if ($scope.calories > 2000) {
+                $mdDialog.show(
+                    $mdDialog.alert()
+                    .parent(angular.element(document.body))
+                    .title('Too much calories!')
+                    .content('Dude, you must control yourself. Calorie count exceeds 2,000 and you are therefore not allowed to eat this thing. Sorry!')
+                    .ariaLabel('Too much calories!')
+                    .ok('Got it!')
+                    .targetEvent(ev)
+                );
+            } else {
+                // add logic here
+                $mdToast.show(
+                    $mdToast.simple()
+                    .content('Journal Added!')
+                    .hideDelay(1000)
+                    .position($scope.getToastPosition())
+                );
+                window.location = window.location.href.split('#')[0] + '#/journal';
+            }
+        } else {
+            $mdToast.show(
+                $mdToast.simple()
+                .content('You have to fix the errors before adding this journal!')
+                .hideDelay(1000)
+                .position($scope.getToastPosition())
             );
-        }*/
-        // check if this meal is the eleventh meal
-        // if it is, show a dialog showing 'nilapas na 10 imo meal okie ?'
-        // TODO : put it here
-
-        // redirect the user back to its journal
-        window.location = window.location.href.split('#')[0] + '#/journal';
+        }
     };
 }]);
 
@@ -225,6 +260,7 @@ app.controller('journalDetailController', ['$scope', '$mdDialog', '$mdToast', fu
 
     $scope.currentJournal = journal;
 
+    $scope.unit = journal.unit;
     $scope.calories = journal.calories * journal.quantity;
     $scope.quantity = journal.quantity;
 
@@ -298,6 +334,7 @@ app.controller('journalDetailController', ['$scope', '$mdDialog', '$mdToast', fu
                     $mdToast.simple()
                     .content('Journal Updated!')
                     .hideDelay(1000)
+                    .position($scope.getToastPosition())
                 );
                 window.location = window.location.href.split('#')[0] + '#/journal';
             }
