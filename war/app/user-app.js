@@ -191,15 +191,10 @@
             $http
                 .get('test/journals.json')
                 .success(function (response) {
-                    var groupedMeals = meals.groupMeals(response.journals);
-                    /*var keys, key;
-                    for (key in groupedMeals) {
-                    	if (groupedMeals.hasOwnProperty(key)) {
-                    		keys.push(key);
-                    	}
-                    }
-                    keys.sort();*/
+                	var journals = response.journals;
+                    var groupedMeals = meals.groupMeals(journals);
                     
+                    $scope.journals = journals;
                     $scope.groupedMeals = groupedMeals;
                     $scope.dates = groupedMeals.keys();
                 });

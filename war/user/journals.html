@@ -38,7 +38,7 @@
         <!-- The search results list -->
         <md-list ng-hide="searchBoxHidden || !search.length">
             <md-subheader>Search Results</md-subheader>
-            <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in filteredMeals=(rawMeals | filter:search)">
+            <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in filteredMeals=(journals | filter:search)">
                 <img ng-src="{{ meal.iconUrl }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text">
                     <h3>{{ meal.name }}</h3>
