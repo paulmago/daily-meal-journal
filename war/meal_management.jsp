@@ -15,13 +15,13 @@
             <div class="subheader">Admin Version</div>
         </div>
         <md-list>
+        	<md-list-item ng-click="gotoHome()">
+                <md-icon md-svg-icon="action:home"></md-icon>
+                <p>Home</p>
+            </md-list-item>
             <md-list-item ng-click="navigateTo('/meals')">
                 <md-icon md-svg-src="svg/cutlery6.svg"></md-icon>
                 <p>Meals</p>
-            </md-list-item>
-            <md-list-item ng-click="navigateTo('/about')">
-                <md-icon md-svg-icon="alert:error_outline"></md-icon>
-                <p>About</p>
             </md-list-item>
         </md-list>
     </md-sidenav>

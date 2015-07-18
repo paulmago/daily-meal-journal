@@ -14,6 +14,10 @@
             <h1>Daily Meal Journal</h1>
         </div>
         <md-list>
+            <md-list-item ng-click="gotoHome()">
+                <md-icon md-svg-icon="action:home"></md-icon>
+                <p>Home</p>
+            </md-list-item>
             <md-list-item ng-click="navigateTo('/journal')">
                 <md-icon md-svg-icon="navigation:apps"></md-icon>
                 <p>My Journal</p>
@@ -21,10 +25,6 @@
             <md-list-item ng-click="navigateTo('/meals')">
                 <md-icon md-svg-src="svg/cutlery6.svg"></md-icon>
                 <p>Meals</p>
-            </md-list-item>
-            <md-list-item ng-click="navigateTo('/about')">
-                <md-icon md-svg-icon="alert:error_outline"></md-icon>
-                <p>About</p>
             </md-list-item>
         </md-list>
     </md-sidenav>

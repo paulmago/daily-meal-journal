@@ -57,12 +57,15 @@ app.filter('underscoreToHuman', function () {
 });
 
 // base file controller
-app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $mdSidenav, $mdDialog) {
+app.controller('defaultController', ['$scope', '$mdSidenav', '$window', function ($scope, $mdSidenav, $window) {
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
     $scope.navigateTo = function (where) {
         window.location = window.location.href.split('#')[0] + '#' + where;
+    };
+    $scope.gotoHome = function () {
+        window.location = window.location.origin;
     };
 }]);
 

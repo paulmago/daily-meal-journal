@@ -48,6 +48,9 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
     $scope.navigateTo = function (where) {
         window.location = window.location.href.split('#')[0] + '#' + where;
     };
+    $scope.gotoHome = function () {
+        window.location = window.location.origin;
+    };
 }]);
 
 // MEALS LISTING
