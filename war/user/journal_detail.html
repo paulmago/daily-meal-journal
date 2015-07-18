@@ -1,0 +1,45 @@
+<div layout="column" flex>
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <md-button ng-click="backToJournal()" class="md-icon-button">
+                <md-icon aria-label="Menu" md-svg-icon="navigation:arrow_back"></md-icon>
+            </md-button>
+            <h1 class="md-toolbar-tools">{{ ui.toolbarLabel }}</h1>
+            <span flex></span>
+            <md-button ng-click="deleteJournal($event)" class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="action:delete"></md-icon>
+            </md-button>
+            <md-button ng-click="updateJournal($event)" class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="action:done"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div class="below-toolbar-img">
+        <img src="meals-images/juice.jpg">
+    </div>
+
+    <md-content layout-padding class="autoScroll padding-big">
+        <form name="editJournal">
+            <md-input-container class="md-icon-float">
+                <label>Unit</label>
+                <md-icon md-svg-icon="image:texture" class="unit"></md-icon>
+                <input ng-model="unit" disabled>
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <label>Calories</label>
+                <md-icon md-svg-src="svg/health-clinic2.svg" class="calories"></md-icon>
+                <input ng-model="calories" disabled>
+            </md-input-container>
+            <md-input-container class="md-icon-float">
+                <label>Quantity</label>
+                <md-icon md-svg-icon="content:add_circle" class="quantity"></md-icon>
+                <input type="text" name="quantity" pattern="[1-9]{1}\d*" ng-model="quantity" ng-change="updateCalories()" required>
+                <div ng-messages="editJournal.quantity.$error">
+                    <div ng-message="required">This is <b>required</b>.</div>
+                    <div ng-message="pattern">This should be a positive integer.</div>
+                </div>
+            </md-input-container>
+        </form>
+    </md-content>
+</div>

@@ -10,8 +10,8 @@
     <div class="container">
         <img src="svg/lunch4.svg">
         <h1>Daily Meal Journal</h1>
-        <md-button class="md-raised md-accent" href="admin.html">Meal Management Screen</md-button>
-        <md-button class="md-raised md-accent" href="user.html">Meal Journal Screen</md-button>
+        <md-button class="md-raised md-accent" href="/admin">Meal Management Screen</md-button>
+        <md-button class="md-raised md-accent" href="/user">Meal Journal Screen</md-button>
     </div>
     <script src="js/angular.min.js "></script>
     <script src="js/angular-route.min.js "></script>

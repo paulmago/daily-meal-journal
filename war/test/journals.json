@@ -1,0 +1,44 @@
+{
+    "journals": [
+        {
+            "name": "Rice",
+            "unit": "cup",
+            "calories": 205,
+            "iconUrl": "meals-icons/rice.jpg",
+            "dateCreated": 1436154582626,
+            "quantity": 1
+        },
+        {
+            "name": "Hard Boiled Egg",
+            "unit": "whole large",
+            "calories": 78,
+            "iconUrl": "meals-icons/hard-boiled-eggs.jpg",
+            "dateCreated": 1436025600000,
+            "quantity": 2
+        },
+        {
+            "name": "Pizza",
+            "unit": "slice",
+            "calories": 285,
+            "iconUrl": "meals-icons/pizza.jpg",
+            "dateCreated": 1436025600000,
+            "quantity": 2
+        },
+        {
+            "name": "Juice",
+            "unit": "cup",
+            "calories": 46,
+            "iconUrl": "meals-icons/juice.jpg",
+            "dateCreated": 1436154582626,
+            "quantity": 2
+        },
+        {
+            "name": "Shrimp",
+            "unit": "100 grams",
+            "calories": 99,
+            "iconUrl": "meals-icons/shrimp.jpg",
+            "dateCreated": 1407168000000,
+            "quantity": 2
+        }
+    ]
+}
