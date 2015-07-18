@@ -40,15 +40,6 @@
                 .iconSet('image', 'svg/image-icons.svg')
                 .defaultIconSet('svg/core-icons.svg');
         }])
-        .filter('underscoreToHuman', function () {
-            return function (input) {
-                input += '';
-                input = input.replace('_', ' ');
-                return input.replace(/\w\S*/g, function (txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                });
-            };
-        })
         .service('meals', function () {
             return {
                 groupMeals: function (mealsArray) {
@@ -189,65 +180,28 @@
                 }
             };
         }])
-        .controller('journalController', ['$scope', '$http', function ($scope, $http) {
+        .run(function($rootScope){
+		  //Just add a reference to some utility methods in rootscope.
+		  $rootScope.Utils = {
+		     keys : Object.keys
+		  }
+		})
+        .controller('journalController', ['$scope', '$http', 'meals', function ($scope, $http, meals) {
             // getting journals
             $http
                 .get('test/journals.json')
                 .success(function (response) {
-                    var meals = response.journals;
-
-                    // get timestamps for related dates to compare against journal data
-                    var now = new Date();
-                    var timestampToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-                    var timestampYesterday = timestampToday - 86400000;
-                    var temp = new Date(now.setDate(now.getDate() - now.getDay()));
-                    var timestampThisWeek = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
-
-                    var objects = {};
-                    var totals = {};
-                    var grandTotal = 0;
-
-                    var i;
-                    for (i = 0; i < meals.length; i += 1) {
-                        if (meals[i].dateCreated >= timestampToday) {
-                            if (!objects.hasOwnProperty('today')) {
-                                objects.today = [];
-                                totals.today = 0;
-                            }
-
-                            objects.today.push(meals[i]);
-                            totals.today += meals[i].calories * meals[i].quantity;
-                        } else if (meals[i].dateCreated >= timestampYesterday) {
-                            if (!objects.hasOwnProperty('yesterday')) {
-                                objects.yesterday = [];
-                                totals.yesterday = 0;
-                            }
-
-                            objects.yesterday.push(meals[i]);
-                            totals.yesterday += meals[i].calories * meals[i].quantity;
-                        } else if (meals[i].dateCreated >= timestampThisWeek) {
-                            if (!objects.hasOwnProperty('this_week')) {
-                                objects.this_week = [];
-                                totals.this_week = 0;
-                            }
-
-                            objects.this_week.push(meals[i]);
-                            totals.this_week += meals[i].calories * meals[i].quantity;
-                        } else {
-                            if (!objects.hasOwnProperty('others')) {
-                                objects.others = [];
-                                totals.others = 0;
-                            }
-
-                            objects.others.push(meals[i]);
-                            totals.others += meals[i].calories * meals[i].quantity;
-                        }
-                        grandTotal += meals[i].calories;
+                    var groupedMeals = meals.groupMeals(response.journals);
+                    /*var keys, key;
+                    for (key in groupedMeals) {
+                    	if (groupedMeals.hasOwnProperty(key)) {
+                    		keys.push(key);
+                    	}
                     }
-
-                    $scope.rawMeals = meals;
-                    $scope.groupedMeals = objects;
-                    $scope.totals = totals;
+                    keys.sort();*/
+                    
+                    $scope.groupedMeals = groupedMeals;
+                    $scope.dates = groupedMeals.keys();
                 });
 
             $scope.openJournal = function (journal) {

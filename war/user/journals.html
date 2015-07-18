@@ -24,9 +24,9 @@
     <md-content>
         <!-- The actual list -->
         <md-list ng-show="searchBoxHidden || !search.length">
-            <md-subheader ng-repeat-start="(key, value) in groupedMeals">{{ key | underscoreToHuman }}<span style="float: right;">{{ totals[key] }} calorie(s)</span>
+            <md-subheader ng-repeat-start="timestamp in Utils.keys(groupedMeals) | orderBy:timestamp">{{ timestamp | date:"MMMM d" }}<span style="float: right;">{{ groupedMeals[timestamp].totalCalories }} calorie(s)</span>
             </md-subheader>
-            <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in value">
+            <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in groupedMeals[timestamp] | orderBy: meal.dateCreated">
                 <img ng-src="{{ meal.iconUrl }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text">
                     <h3>{{ meal.name }}</h3>
