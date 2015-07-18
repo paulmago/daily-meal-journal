@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-        .module('StarterApp', ['ngMaterial', 'ngRoute', 'ngMessages'])
+        .module('MealJournalApp', ['ngMaterial', 'ngRoute', 'ngMessages'])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
                 .when('/journal', {

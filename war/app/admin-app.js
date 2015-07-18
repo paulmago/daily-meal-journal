@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('StarterApp', ['ngMaterial', 'ngRoute', 'ngMessages']);
+var app = angular.module('MealManagementApp', ['ngMaterial', 'ngRoute', 'ngMessages']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider

@@ -1,4 +1,4 @@
-<html lang="en" ng-app="StarterApp">
+<html lang="en" ng-app="MealManagementApp">
 
 <head>
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
