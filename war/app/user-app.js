@@ -49,30 +49,32 @@
                 });
             };
         })
-        .factory('groupMeals', function () {
-            return function (mealsArray) {
-                var grabDate = function (timestamp) {
-                    var date = new Date(timestamp);
-                    var temp = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                    return temp.getTime().toString();
-                };
-                
-                var meals = {};
-                var date;
-                
-                for (var i = 0; i < mealsArray.length; i += 1) {
-                    date = grabDate(mealsArray[i].dateCreated);
-                    
-                    if (!meals.hasOwnProperty(date)) {
-                        meals[date] = [];
-                        meals[date].totalCalories = 0;
+        .service('meals', function () {
+            return {
+                groupMeals: function (mealsArray) {
+                        var grabDate = function (timestamp) {
+                        var date = new Date(timestamp);
+                        var temp = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                        return temp.getTime().toString();
+                    };
+
+                    var meals = {};
+                    var date;
+
+                    for (var i = 0; i < mealsArray.length; i += 1) {
+                        date = grabDate(mealsArray[i].dateCreated);
+
+                        if (!meals.hasOwnProperty(date)) {
+                            meals[date] = [];
+                            meals[date].totalCalories = 0;
+                        }
+
+                        meals[date].push(mealsArray[i]);  
+                        meals[date].totalCalories += mealsArray[i].calories * mealsArray[i].quantity;
                     }
-                    
-                    meals[date].push(mealsArray[i]);  
-                    meals[date].totalCalories += mealsArray[i].calories * mealsArray[i].quantity;
+
+                    return meals;
                 }
-                
-                return meals;
             };
         })
         .controller('defaultController', ['$scope', '$mdSidenav', '$window', function ($scope, $mdSidenav, $window) {
