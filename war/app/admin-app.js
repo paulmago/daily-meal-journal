@@ -124,7 +124,7 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
         var confirm = $mdDialog.confirm()
             .parent(angular.element(document.body))
             .title('Are you sure you want to delete this meal?')
-            .content('This action cannot be undone because we dont give a shit.')
+            .content('This action cannot be undone.')
             .ariaLabel('Lucky day')
             .ok('Delete')
             .cancel('Cancel')

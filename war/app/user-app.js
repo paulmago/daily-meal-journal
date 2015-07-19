@@ -267,7 +267,7 @@
                                 .confirm()
                                 .parent(angular.element(document.body))
                                 .title('Are you sure you want to delete this journal?')
-                                .content('This action cannot be undone because we dont give a shit.')
+                                .content('This action cannot be undone.')
                                 .ariaLabel('Lucky day')
                                 .ok('Delete')
                                 .cancel('Cancel')
