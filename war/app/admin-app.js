@@ -142,7 +142,7 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
         });
     };
 
-    $scope.updateMeal = function () {
+    $scope.updateMeal = function (ev) {
         if ($scope.editMealForm.$valid) {
             $mdToast.show(
                 $mdToast.simple()
@@ -151,13 +151,18 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
                 .position($scope.getToastPosition())
             );
             window.location = window.location.href.split('#')[0] + '#/meals';
-        } else {
-            $mdToast.show(
-                $mdToast.simple()
-                .content('You have to fix the errors before updating the meal!')
-                .hideDelay(1000)
-                .position($scope.getToastPosition())
-            );
+        } else {            
+            var confirm = $mdDialog.confirm()
+                .parent(angular.element(document.body))
+                .title('Some data inputted are invalid/missing.')
+                .content('You have to fix the errors before updating the meal.')
+                .ariaLabel('Updating a meal')
+                .ok('Okay, I\'ll fix it.')
+                .targetEvent(ev);
+            
+            $mdDialog.show(confirm).then(function () {
+                // do nothing
+            });
         }
     };
 }]);
@@ -193,12 +198,17 @@ app.controller('adminAddMealController', ['$scope', '$mdToast', function ($scope
             );
             window.location = window.location.href.split('#')[0] + '#/meals';
         } else {
-            $mdToast.show(
-                $mdToast.simple()
-                .content('You have to fix the errors before adding the meal!')
-                .hideDelay(1000)
-                .position($scope.getToastPosition())
-            );
+            var confirm = $mdDialog.confirm()
+                .parent(angular.element(document.body))
+                .title('Some data inputted are invalid/missing.')
+                .content('You have to fix the errors before adding the meal.')
+                .ariaLabel('Adding a meal')
+                .ok('Okay, I\'ll fix it.')
+                .targetEvent(ev);
+            
+            $mdDialog.show(confirm).then(function () {
+                // do nothing
+            });
         }
     };
 

@@ -170,13 +170,17 @@
                         window.location = window.location.href.split('#')[0] + '#/journal';
                     }
                 } else {
-                    $mdToast.show(
-                        $mdToast
-                            .simple()
-                            .content('You have to fix the errors before adding this journal!')
-                            .hideDelay(1000)
-                            .position($scope.getToastPosition())
-                    );
+                    var confirm = $mdDialog.confirm()
+                        .parent(angular.element(document.body))
+                        .title('Some data inputted are invalid/missing.')
+                        .content('You have to fix the errors before adding this journal.')
+                        .ariaLabel('Adding a meal to a journal')
+                        .ok('Okay, I\'ll fix it.')
+                        .targetEvent(ev);
+
+                    $mdDialog.show(confirm).then(function () {
+                        // do nothing
+                    });
                 }
             };
         }])
@@ -311,13 +315,17 @@
                         window.location = window.location.href.split('#')[0] + '#/journal';
                     }
                 } else {
-                    $mdToast.show(
-                        $mdToast
-                            .simple()
-                            .content('You have to fix the errors before updating this journal!')
-                            .hideDelay(1000)
-                            .position($scope.getToastPosition())
-                    );
+                    var confirm = $mdDialog.confirm()
+                        .parent(angular.element(document.body))
+                        .title('Some data inputted are invalid/missing.')
+                        .content('You have to fix the errors before updating your journal.')
+                        .ariaLabel('Updating a meal in a journal')
+                        .ok('Okay, I\'ll fix it.')
+                        .targetEvent(ev);
+
+                    $mdDialog.show(confirm).then(function () {
+                        // do nothing
+                    });
                 }
             };
         }]);
