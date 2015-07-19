@@ -167,7 +167,7 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
     };
 }]);
 
-app.controller('adminAddMealController', ['$scope', '$mdToast', function ($scope, $mdToast) {
+app.controller('adminAddMealController', ['$scope', '$mdToast', '$mdDialog', function ($scope, $mdToast, $mdDialog) {
     $scope.ui = {
         'toolbarLabel': 'Add Meal'
     };
@@ -188,7 +188,7 @@ app.controller('adminAddMealController', ['$scope', '$mdToast', function ($scope
     };
 
     // CHECK ACTION -- when the admin submits the new meal
-    $scope.addMeal = function () {
+    $scope.addMeal = function (ev) {
         if ($scope.addMealForm.$valid) {
             $mdToast.show(
                 $mdToast.simple()
