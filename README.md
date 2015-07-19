@@ -36,3 +36,19 @@ The goal of this project is to create a Meal Journal for users who wish to keep 
 - If the searched item is not found, return an error message
 - If number of meals per day exceeds 10, return an error message
 - If calorie count exceeds 2000, return an error message
+
+----------------
+
+### Installation
+- First, you would need these things:
+  - npm (for installing web application dependencies)
+  - karma (for jasmine tests)
+- Second, open the command prompt in /war and type ```npm install```
+
+### Execution
+- Import this as a project in Eclipse. Make sure you have Java SDK and Google App Engine installed on your computer.
+- Run as a web application
+
+### Jasmine tests
+- You are required to install karma using npm.
+- Open the command prompt in /war and type ```karma start```
