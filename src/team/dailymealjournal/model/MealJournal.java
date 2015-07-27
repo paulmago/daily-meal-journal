@@ -18,14 +18,23 @@ public class MealJournal implements Serializable {
     @Attribute(version = true)
     private Long version;
     
-    private int mealId;
+    private long mealJournalId;
+    private long mealId;
     private int quantity;
+ 
+    public long getMealJournalId() {
+        return mealJournalId;
+    }
 
-    public int getMealId() {
+    public void setMealJournalId(long mealJournalId) {
+        this.mealJournalId = mealJournalId;
+    }
+
+    public long getMealId() {
         return mealId;
     }
 
-    public void setMealId(int mealId) {
+    public void setMealId(long mealId) {
         this.mealId = mealId;
     }
 

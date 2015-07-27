@@ -18,6 +18,7 @@ public class Meal implements Serializable {
     @Attribute(version = true)
     private Long version;
     
+    private long mealId;
     private String name;
     private String unit;
     private int calories;
@@ -61,6 +62,14 @@ public class Meal implements Serializable {
         this.version = version;
     }
 
+    public long getMealId() {
+        return mealId;
+    }
+
+    public void setMealId(long mealId) {
+        this.mealId = mealId;
+    }
+    
     public String getName() {
         return name;
     }

@@ -19,8 +19,17 @@ public class Journal implements Serializable {
     @Attribute(version = true)
     private Long version;
     
-    private Date dateCreated;
+    private long journalId;
+    private Date dateCreated = new Date();
+    
+    public long getJournalId() {
+        return journalId;
+    }
 
+    public void setJournalId(long journalId) {
+        this.journalId = journalId;
+    }
+    
     public Date getDateCreated() {
         return dateCreated;
     }
