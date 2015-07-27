@@ -1,6 +1,7 @@
 package team.dailymealjournal.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -17,6 +18,16 @@ public class Journal implements Serializable {
 
     @Attribute(version = true)
     private Long version;
+    
+    private Date dateCreated;
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
     /**
      * Returns the key.

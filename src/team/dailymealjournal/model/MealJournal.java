@@ -17,6 +17,25 @@ public class MealJournal implements Serializable {
 
     @Attribute(version = true)
     private Long version;
+    
+    private int mealId;
+    private int quantity;
+
+    public int getMealId() {
+        return mealId;
+    }
+
+    public void setMealId(int mealId) {
+        this.mealId = mealId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     /**
      * Returns the key.
