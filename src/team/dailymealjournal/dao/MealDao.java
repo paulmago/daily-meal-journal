@@ -36,7 +36,7 @@ public class MealDao {
         try {
             Transaction tx = Datastore.beginTransaction();
             //Manually allocate key
-            Key key = Datastore.allocateId(KeyFactory.createKey("Admin", "Default"), "Meal");
+            Key key = Datastore.allocateId(KeyFactory.createKey("Account", "Default"), "Meal");
             mealModel.setKey(key);
             mealModel.setMealId(key.getId());
             Datastore.put(mealModel);
@@ -53,7 +53,7 @@ public class MealDao {
      */
     public List<Meal> getAllMeals() {
         MealMeta meta = new MealMeta();
-        Key parentKey = KeyFactory.createKey("Admin", "Default");
+        Key parentKey = KeyFactory.createKey("Account", "Default");
         return Datastore.query(meta ,parentKey).asList();
     }
 
