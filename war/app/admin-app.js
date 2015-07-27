@@ -158,6 +158,7 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
                 .content('You have to fix the errors before updating the meal.')
                 .ariaLabel('Updating a meal')
                 .ok('Okay, I\'ll fix it.')
+                .cancel(promise)
                 .targetEvent(ev);
             
             $mdDialog.show(confirm).then(function () {
