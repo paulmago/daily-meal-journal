@@ -10,7 +10,6 @@ import java.util.List;
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 
-import team.dailymealjournal.dto.MealDto;
 import team.dailymealjournal.model.Meal;
 import team.dailymealjournal.meta.MealMeta;
 import team.dailymealjournal.service.MealService;
@@ -29,24 +28,15 @@ public class AllController extends Controller {
      * Holds the method for adding a meal.
      */
     private MealService service = new MealService();
+    
+    /**
+     * The MealMeta to use.
+     * Responsible for converting the models to JSON format.
+     */
     private MealMeta meta = MealMeta.get();
 
     @Override
-    public Navigation run() throws Exception {
-        MealDto meal = new MealDto();
-        
-        meal.setName("Shrimp");
-        meal.setUnit("pieces");
-        meal.setCalories(240);
-        meal.setDefaultQuantity(6);
-        service.addMeal(meal);
-        
-        meal.setName("Egg");
-        meal.setUnit("pieces");
-        meal.setCalories(300);
-        meal.setDefaultQuantity(1);
-        service.addMeal(meal);
-        
+    public Navigation run() throws Exception {        
         List<Meal> mealList = service.getMealList();
         response.getWriter().write(meta.modelsToJson(mealList));
         return null;
