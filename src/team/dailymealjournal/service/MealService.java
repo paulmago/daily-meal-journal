@@ -32,7 +32,7 @@ public class MealService {
      * @param input - meal to add.
      * @return MealDto - if transaction was unsuccessful, contains list of errors.
      */
-    public MealDto meal(MealDto input) {
+    public MealDto addMeal(MealDto input) {
         Meal meal = new Meal();
         meal.setName(input.getName());
         meal.setUnit(input.getUnit());
@@ -77,7 +77,8 @@ public class MealService {
      * @return MealDto - if transaction was unsuccessful, contains list of errors.
      */
     public MealDto deleteMeal(MealDto input) {
-        Meal meal = setModelValues(input);
+        Meal meal = new Meal();
+        meal.setMealId(input.getMealId());
 
         if(!this.dao.deleteMeal(meal)) {
             input.setErrorList(new ArrayList<String>());
@@ -89,6 +90,7 @@ public class MealService {
     
     private Meal setModelValues(MealDto input) {
         Meal meal = new Meal();
+        meal.setMealId(input.getMealId());
         meal.setName(input.getName());
         meal.setUnit(input.getUnit());
         meal.setCalories(input.getCalories());
