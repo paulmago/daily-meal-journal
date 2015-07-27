@@ -56,9 +56,9 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
 // MEALS LISTING
 app.controller('adminMealsController', ['$scope', '$http', function ($scope, $http) {
     $http
-        .get('test/meals.json')
+        .get('http://localhost:8888/meal/all')
         .success(function (response) {
-            $scope.meals = response.meals;
+            $scope.meals = response;
         });
 
     $scope.searchBoxHidden = true;
@@ -68,7 +68,7 @@ app.controller('adminMealsController', ['$scope', '$http', function ($scope, $ht
 
     // action performed when a meal on the list is clicked
     $scope.openMeal = function (meal) {
-        window.location = window.location.href.split('#')[0] + '#/meals/' + meal.id;
+        window.location = window.location.href.split('#')[0] + '#/meals/' + meal.mealId;
     };
 
     // FAB action
@@ -168,7 +168,7 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
     };
 }]);
 
-app.controller('adminAddMealController', ['$scope', '$mdToast', '$mdDialog', function ($scope, $mdToast, $mdDialog) {
+app.controller('adminAddMealController', ['$scope', '$http', '$mdToast', '$mdDialog', function ($scope, $http, $mdToast, $mdDialog) {
     $scope.ui = {
         'toolbarLabel': 'Add Meal'
     };
@@ -191,13 +191,18 @@ app.controller('adminAddMealController', ['$scope', '$mdToast', '$mdDialog', fun
     // CHECK ACTION -- when the admin submits the new meal
     $scope.addMeal = function (ev) {
         if ($scope.addMealForm.$valid) {
-            $mdToast.show(
-                $mdToast.simple()
-                .content('Meal Added!')
-                .hideDelay(1000)
-                .position($scope.getToastPosition())
-            );
-            window.location = window.location.href.split('#')[0] + '#/meals';
+            $http
+                .post('http://localhost:8888/meal/add', $scope.addMealForm)
+                .success(function (data, status, headers, config) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .content('Meal Added!')
+                        .hideDelay(1000)
+                        .position($scope.getToastPosition())
+                    );
+                    window.location = window.location.href.split('#')[0] + '#/meals';
+                });
+            
         } else {
             var confirm = $mdDialog.confirm()
                 .parent(angular.element(document.body))
