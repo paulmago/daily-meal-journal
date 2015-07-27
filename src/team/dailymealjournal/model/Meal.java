@@ -21,7 +21,7 @@ public class Meal implements Serializable {
     private String name;
     private String unit;
     private int calories;
-    private int defaultQuantitiy;
+    private int defaultQuantity;
 
     /**
      * Returns the key.
@@ -85,12 +85,12 @@ public class Meal implements Serializable {
         this.calories = calories;
     }
 
-    public int getDefaultQuantitiy() {
-        return defaultQuantitiy;
+    public int getDefaultQuantity() {
+        return defaultQuantity;
     }
 
-    public void setDefaultQuantitiy(int defaultQuantitiy) {
-        this.defaultQuantitiy = defaultQuantitiy;
+    public void setDefaultQuantity(int defaultQuantity) {
+        this.defaultQuantity = defaultQuantity;
     }
 
     @Override
