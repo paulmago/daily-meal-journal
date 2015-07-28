@@ -56,6 +56,18 @@ public class JournalDao {
         Key parentKey = KeyFactory.createKey("Account", "Default");
         return Datastore.query(meta ,parentKey).asList();
     }
+    
+    /**
+     * Method used to retrieve a Journal using its ID.
+     * @param long journalId
+     * @return Journal.
+     */
+    public Journal getJournal(long journalId) {
+        JournalMeta meta = new JournalMeta();
+        Key parentKey = KeyFactory.createKey("Account", "Default");
+        FilterCriterion mainFilter = meta.journalId.equal(journalId);
+        return Datastore.query(meta ,parentKey).filter(mainFilter).asSingle();
+    }
 
     /**
      * Method used to edit a journal.
