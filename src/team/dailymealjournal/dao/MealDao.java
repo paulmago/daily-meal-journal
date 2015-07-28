@@ -56,6 +56,18 @@ public class MealDao {
         Key parentKey = KeyFactory.createKey("Account", "Default");
         return Datastore.query(meta ,parentKey).asList();
     }
+    
+    /**
+     * Method used to retrieve a Meal using its ID.
+     * @param long mealId
+     * @return Meal.
+     */
+    public Meal getMeal(long mealId) {
+        MealMeta meta = new MealMeta();
+        Key parentKey = KeyFactory.createKey("Account", "Default");
+        FilterCriterion mainFilter = meta.mealId.equal(mealId);
+        return Datastore.query(meta ,parentKey).filter(mainFilter).asSingle();
+    }
 
     /**
      * Method used to edit a meal.

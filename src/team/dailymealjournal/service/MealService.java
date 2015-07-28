@@ -33,11 +33,7 @@ public class MealService {
      * @return MealDto - if transaction was unsuccessful, contains list of errors.
      */
     public MealDto addMeal(MealDto input) {
-        Meal meal = new Meal();
-        meal.setName(input.getName());
-        meal.setUnit(input.getUnit());
-        meal.setCalories(input.getCalories());
-        meal.setDefaultQuantity(input.getDefaultQuantity());
+        Meal meal = setModelValues(input);
 
         if(!this.dao.addMeal(meal)) {
             input.setErrorList(new ArrayList<String>());
@@ -90,7 +86,6 @@ public class MealService {
     
     private Meal setModelValues(MealDto input) {
         Meal meal = new Meal();
-        meal.setMealId(input.getMealId());
         meal.setName(input.getName());
         meal.setUnit(input.getUnit());
         meal.setCalories(input.getCalories());
