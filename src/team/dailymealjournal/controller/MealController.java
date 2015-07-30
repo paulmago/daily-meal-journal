@@ -3,7 +3,7 @@
  * Proprietary and confidential
  * Copyright (C) Miguelito™ - All Rights Reserved 2015
  * --------------------------------------------------------------------------- */
-package team.dailymealjournal.controller.meal;
+package team.dailymealjournal.controller;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import team.dailymealjournal.service.MealService;
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
  */
-public class AllController extends Controller {
+public class MealController extends Controller {
     
     /**
      * The MealService to use.
@@ -36,9 +36,18 @@ public class AllController extends Controller {
     private MealMeta meta = MealMeta.get();
 
     @Override
-    public Navigation run() throws Exception {        
-        List<Meal> mealList = service.getMealList();
-        response.getWriter().write(meta.modelsToJson(mealList));
+    public Navigation run() throws Exception {
+        String json = "";
+        if(null != requestScope("id")) {
+            long id = asLong("id");
+            Meal meal = service.getMeal(id);
+            json = meta.modelToJson(meal);
+        }
+        else {
+            List<Meal> mealList = service.getMealList();
+            json = meta.modelsToJson(mealList);
+        }
+        response.getWriter().write(json);
         return null;
     }
 }
