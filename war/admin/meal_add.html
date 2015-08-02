@@ -16,7 +16,7 @@
         <md-input-container class="md-icon-float">
             <label>Meal Name</label>
             <md-icon md-svg-src="svg/cutlery6.svg" class="calories"></md-icon>
-            <input type="text" name="name" ng-model="name" required>
+            <input type="text" name="mealName" ng-model="mealName" required>
             <div ng-messages="addMealForm.mealName.$error">
                 <div ng-message="required">This is <b>required</b>.</div>
             </div>
@@ -25,7 +25,7 @@
             <label>Default Quantity</label>
             <md-icon md-svg-icon="content:add_circle" class="quantity"></md-icon>
             <input type="text" name="defaultQuantity" pattern="[1-9]{1}\d*" ng-model="defaultQuantity" required>
-            <div ng-messages="addMealForm.quantity.$error">
+            <div ng-messages="addMealForm.defaultQuantity.$error">
                 <div ng-message="required">This is <b>required</b>.</div>
                 <div ng-message="pattern">This should be a positive integer.</div>
             </div>
