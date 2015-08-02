@@ -5,12 +5,9 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.controller.meal;
 
-import java.util.Map;
-
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 import org.slim3.util.BeanUtil;
-import org.slim3.util.RequestMap;
 
 import team.dailymealjournal.dto.MealDto;
 import team.dailymealjournal.service.MealService;
@@ -29,12 +26,11 @@ public class AddController extends Controller {
      * Holds the method for adding a meal.
      */
     private MealService service = new MealService();
-
+    
     @Override
     public Navigation run() throws Exception {
-        Map<String,Object> input = new RequestMap(this.request);
         MealDto mealDto = new MealDto();
-        BeanUtil.copy(input, mealDto);
+        BeanUtil.copy(this.request, mealDto);
         service.addMeal(mealDto);
         return null;
     }
