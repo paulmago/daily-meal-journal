@@ -56,7 +56,7 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
 // MEALS LISTING
 app.controller('adminMealsController', ['$scope', '$http', function ($scope, $http) {
     $http
-        .get('http://localhost:8888/meal/all')
+        .get('http://localhost:8888/meal')
         .success(function (response) {
             $scope.meals = response;
         });
@@ -78,24 +78,21 @@ app.controller('adminMealsController', ['$scope', '$http', function ($scope, $ht
 }]);
 
 // MEAL DETAILS
-app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog', '$mdToast', function ($scope, $routeParams, $mdDialog, $mdToast) {
-    var mealId = $routeParams.param1;
+app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSerializerJQLike', '$routeParams', '$mdDialog', '$mdToast', function ($scope, $http, $httpParamSerializerJQLike, $routeParams, $mdDialog, $mdToast) {
+    var mealId = $routeParams.mealId;
+    //var uri = 'http://localhost:8888/meal?id=' + mealId;
 
-    // assuming this is the meal that we got
-    var meal = {
-        "name": "Hard Boiled Egg",
-        "id": 2,
-        "defaultQuantity": 1,
-        "unit": "whole large",
-        "calories": 78,
-        "iconUrl": "meals-icons/hard-boiled-eggs.jpg",
-        "imageUrl": "meals-images/hard-boiled-eggs.jpg"
-    };
-
-    $scope.mealName = meal.name;
-    $scope.quantity = meal.defaultQuantity;
-    $scope.unit = meal.unit;
-    $scope.calories = meal.calories;
+    $http({
+        url : 'http://localhost:8888/meal', 
+        method : "GET",
+        params : {id : mealId}
+    }).success(function (response) {
+        var meal = response;
+        $scope.mealName = meal.name;
+        $scope.defaultQuantity = meal.defaultQuantity;
+        $scope.unit = meal.unit;
+        $scope.calories = meal.calories;
+    });
 
     $scope.ui = {
         'toolbarLabel': 'Edit Meal'
@@ -129,14 +126,39 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
             .ok('Delete')
             .cancel('Cancel')
             .targetEvent(ev);
+
         $mdDialog.show(confirm).then(function () {
-            $mdToast.show(
-                $mdToast.simple()
-                .content('Meal Deleted!')
-                .hideDelay(1000)
-                .position($scope.getToastPosition())
-            );
-            window.location = window.location.href.split('#')[0] + '#/meals';
+            var mealData = { 'mealId' : mealId };
+
+            $http
+                ({
+                    method: 'DELETE',
+                    url: 'http://localhost:8888/meal/delete',
+                    params: mealData
+                })
+                .success(function (data, status, headers, config) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .content('Meal Deleted!')
+                        .hideDelay(1000)
+                        .position($scope.getToastPosition())
+                    );
+                    window.location = window.location.href.split('#')[0] + '#/meals';
+                })
+                .error(function (data, status, headers, config) {
+                    var alert = $mdDialog.alert()
+                        .parent(angular.element(document.body))
+                        .title('Server connection error')
+                        .content('Something went wrong when processing your request, please try again.')
+                        .ariaLabel('Updating a meal server error')
+                        .ok('Okay')
+                        .targetEvent(ev);
+                    
+                    $mdDialog.show(alert).then(function () {
+                        // do nothing
+                    });
+                });
+
         }, function () {
             // do nothing
         });
@@ -144,31 +166,62 @@ app.controller('adminEditMealController', ['$scope', '$routeParams', '$mdDialog'
 
     $scope.updateMeal = function (ev) {
         if ($scope.editMealForm.$valid) {
-            $mdToast.show(
-                $mdToast.simple()
-                .content('Meal Updated!')
-                .hideDelay(1000)
-                .position($scope.getToastPosition())
-            );
-            window.location = window.location.href.split('#')[0] + '#/meals';
+            var mealData =
+                {
+                    'mealId' : parseInt(mealId),
+                    'calories' : parseInt($scope.calories),
+                    'defaultQuantity' : parseInt($scope.defaultQuantity),
+                    'unit' : $scope.unit,
+                    'name' : $scope.mealName
+                };
+
+            $http
+                ({
+                    method: 'PUT',
+                    url: 'http://localhost:8888/meal/edit',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    data: $httpParamSerializerJQLike(mealData)
+                })
+                .success(function (data, status, headers, config) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                        .content('Meal Updated!')
+                        .hideDelay(1000)
+                        .position($scope.getToastPosition())
+                    );
+                    window.location = window.location.href.split('#')[0] + '#/meals';
+                })
+                .error(function (data, status, headers, config) {
+                    var alert = $mdDialog.alert()
+                        .parent(angular.element(document.body))
+                        .title('Server connection error')
+                        .content('Something went wrong when processing your request, please try again.')
+                        .ariaLabel('Updating a meal server error')
+                        .ok('Okay')
+                        .targetEvent(ev);
+                    
+                    $mdDialog.show(alert).then(function () {
+                        // do nothing
+                    });
+                });
+
         } else {            
-            var confirm = $mdDialog.confirm()
+            var alert = $mdDialog.alert()
                 .parent(angular.element(document.body))
                 .title('Some data inputted are invalid/missing.')
                 .content('You have to fix the errors before updating the meal.')
                 .ariaLabel('Updating a meal')
                 .ok('Okay, I\'ll fix it.')
-                .cancel(promise)
                 .targetEvent(ev);
             
-            $mdDialog.show(confirm).then(function () {
+            $mdDialog.show(alert).then(function () {
                 // do nothing
             });
         }
     };
 }]);
 
-app.controller('adminAddMealController', ['$scope', '$http', '$mdToast', '$mdDialog', function ($scope, $http, $mdToast, $mdDialog) {
+app.controller('adminAddMealController', ['$scope', '$http', '$httpParamSerializerJQLike', '$mdToast', '$mdDialog', function ($scope, $http, $httpParamSerializerJQLike, $mdToast, $mdDialog) {
     $scope.ui = {
         'toolbarLabel': 'Add Meal'
     };
@@ -191,8 +244,21 @@ app.controller('adminAddMealController', ['$scope', '$http', '$mdToast', '$mdDia
     // CHECK ACTION -- when the admin submits the new meal
     $scope.addMeal = function (ev) {
         if ($scope.addMealForm.$valid) {
+            var mealData =
+                {
+                    'calories' : parseInt($scope.calories),
+                    'defaultQuantity' : parseInt($scope.defaultQuantity),
+                    'unit' : $scope.unit,
+                    'name' : $scope.mealName
+                };
+
             $http
-                .post('http://localhost:8888/meal/add', $scope.addMealForm)
+                ({
+                    method: 'POST',
+                    url: 'http://localhost:8888/meal/add',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    data: $httpParamSerializerJQLike(mealData)
+                })
                 .success(function (data, status, headers, config) {
                     $mdToast.show(
                         $mdToast.simple()
@@ -201,10 +267,23 @@ app.controller('adminAddMealController', ['$scope', '$http', '$mdToast', '$mdDia
                         .position($scope.getToastPosition())
                     );
                     window.location = window.location.href.split('#')[0] + '#/meals';
+                })
+                .error(function (data, status, headers, config) {
+                    var alert = $mdDialog.alert()
+                        .parent(angular.element(document.body))
+                        .title('Server connection error')
+                        .content('Something went wrong when processing your request, please try again.')
+                        .ariaLabel('Adding a meal server error')
+                        .ok('Okay')
+                        .targetEvent(ev);
+                    
+                    $mdDialog.show(alert).then(function () {
+                        // do nothing
+                    });
                 });
             
         } else {
-            var confirm = $mdDialog.confirm()
+            var alert = $mdDialog.alert()
                 .parent(angular.element(document.body))
                 .title('Some data inputted are invalid/missing.')
                 .content('You have to fix the errors before adding the meal.')
@@ -212,7 +291,7 @@ app.controller('adminAddMealController', ['$scope', '$http', '$mdToast', '$mdDia
                 .ok('Okay, I\'ll fix it.')
                 .targetEvent(ev);
             
-            $mdDialog.show(confirm).then(function () {
+            $mdDialog.show(alert).then(function () {
                 // do nothing
             });
         }
