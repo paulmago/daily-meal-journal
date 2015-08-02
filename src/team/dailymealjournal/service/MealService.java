@@ -50,6 +50,15 @@ public class MealService {
     public List<Meal> getMealList() {
         return this.dao.getAllMeals();
     }
+    
+    /**
+     * Method used to retrieve a Meal using its ID.
+     * @param long mealId
+     * @return Meal.
+     */
+    public Meal getMeal(long mealId) {
+        return this.dao.getMeal(mealId);
+    }
 
     /**
      * Method used to update a meal.
