@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Roboto'; /*a name to be used later*/
+    src: url('fonts/Roboto-Regular.ttf'); /*URL to font*/
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    background-color: #3F51B5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.sidebar {
+    width: 
+    background-color: red;   
+}
+
+.container {
+    background-color: blue;
+}

@@ -1,0 +1,17 @@
+.sidenav-header {
+    background-color:#3F51B5;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.sidenav-header img {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.sidenav-header h1 {
+  color: #fff;
+  text-align: center;
+  font-weight: normal;
+}
