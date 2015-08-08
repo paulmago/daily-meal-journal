@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import team.dailymealjournal.dao.MealJournalDao;
+import team.dailymealjournal.dto.JournalDto;
 import team.dailymealjournal.dto.MealJournalDto;
+import team.dailymealjournal.model.Journal;
 import team.dailymealjournal.model.MealJournal;
 
 /**
@@ -26,6 +28,12 @@ public class MealJournalService {
      * Holds the method for transacting with the datastore.
      */
     MealJournalDao dao = new MealJournalDao();
+    
+    /**
+     * The JournalService to use.
+     * Holds the method for adding a journal.
+     */
+    private JournalService journalService = new JournalService();
 
     /**
      * Method used to add a mealJournal.
@@ -34,8 +42,13 @@ public class MealJournalService {
      */
     public MealJournalDto addMealJournal(MealJournalDto input) {
         MealJournal mealJournal = setModelValues(input);
+        Journal currentJournal = journalService.getCurrentJournal();
+        if(null == currentJournal) {
+            journalService.addJournal(new JournalDto());
+            currentJournal = journalService.getCurrentJournal();
+        }
 
-        if(!this.dao.addMealJournal(mealJournal)) {
+        if(!this.dao.addMealJournal(currentJournal, mealJournal)) {
             input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }

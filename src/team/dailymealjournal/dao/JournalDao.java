@@ -5,6 +5,7 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slim3.datastore.Datastore;
@@ -14,7 +15,6 @@ import team.dailymealjournal.meta.JournalMeta;
 import team.dailymealjournal.model.Journal;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Transaction;
 
 /**
@@ -36,12 +36,12 @@ public class JournalDao {
         try {
             Transaction tx = Datastore.beginTransaction();
             //Manually allocate key
-            Key key = Datastore.allocateId(KeyFactory.createKey("Account", "Default"), "Journal");
-            journalModel.setKey(key);
+            Key key = Datastore.allocateId("Journal");
             journalModel.setJournalId(key.getId());
             Datastore.put(journalModel);
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             result = false;
         }
         return result;
@@ -53,8 +53,7 @@ public class JournalDao {
      */
     public List<Journal> getAllJournals() {
         JournalMeta meta = new JournalMeta();
-        Key parentKey = KeyFactory.createKey("Account", "Default");
-        return Datastore.query(meta ,parentKey).asList();
+        return Datastore.query(meta).asList();
     }
     
     /**
@@ -64,9 +63,19 @@ public class JournalDao {
      */
     public Journal getJournal(long journalId) {
         JournalMeta meta = new JournalMeta();
-        Key parentKey = KeyFactory.createKey("Account", "Default");
         FilterCriterion mainFilter = meta.journalId.equal(journalId);
-        return Datastore.query(meta ,parentKey).filter(mainFilter).asSingle();
+        return Datastore.query(meta).filter(mainFilter).asSingle();
+    }
+    
+    /**
+     * Method used to retrieve a Journal using its ID.
+     * @param Date dateCreated
+     * @return Journal.
+     */
+    public Journal getJournal(Date dateCreated) {
+        JournalMeta meta = new JournalMeta();
+        FilterCriterion mainFilter = meta.dateCreated.equal(dateCreated);
+        return Datastore.query(meta).filter(mainFilter).asSingle();
     }
 
     /**

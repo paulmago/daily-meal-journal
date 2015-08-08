@@ -11,10 +11,10 @@ import org.slim3.datastore.Datastore;
 import org.slim3.datastore.FilterCriterion;
 
 import team.dailymealjournal.meta.MealJournalMeta;
+import team.dailymealjournal.model.Journal;
 import team.dailymealjournal.model.MealJournal;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Transaction;
 
 /**
@@ -31,15 +31,16 @@ public class MealJournalDao {
      * @param MealJournalModel - MealJournal to be saved.
      * @return Boolean - true, if mealJournal is saved; otherwise, false.
      */
-    public boolean addMealJournal(MealJournal mealJournalModel) {
+    public boolean addMealJournal(Journal journalModel, MealJournal mealJournalModel) {
         boolean result = true;
         try {
             Transaction tx = Datastore.beginTransaction();
             //Manually allocate key
-            Key key = Datastore.allocateId(KeyFactory.createKey("Account", "Default"), "MealJournal");
+            Key key = Datastore.allocateId(journalModel.getKey(), MealJournal.class);
             mealJournalModel.setKey(key);
             mealJournalModel.setMealJournalId(key.getId());
-            Datastore.put(mealJournalModel);
+            mealJournalModel.getJournalRef().setModel(journalModel);
+            Datastore.put(journalModel, mealJournalModel);
             tx.commit();
         } catch (Exception e) {
             result = false;
@@ -53,8 +54,7 @@ public class MealJournalDao {
      */
     public List<MealJournal> getAllMealJournals() {
         MealJournalMeta meta = new MealJournalMeta();
-        Key parentKey = KeyFactory.createKey("Account", "Default");
-        return Datastore.query(meta ,parentKey).asList();
+        return Datastore.query(meta).asList();
     }
     
     /**
@@ -64,9 +64,8 @@ public class MealJournalDao {
      */
     public MealJournal getMealJournal(long mealJournalId) {
         MealJournalMeta meta = new MealJournalMeta();
-        Key parentKey = KeyFactory.createKey("Account", "Default");
         FilterCriterion mainFilter = meta.mealJournalId.equal(mealJournalId);
-        return Datastore.query(meta ,parentKey).filter(mainFilter).asSingle();
+        return Datastore.query(meta).filter(mainFilter).asSingle();
     }
 
     /**

@@ -6,7 +6,9 @@ import java.util.Date;
 import com.google.appengine.api.datastore.Key;
 
 import org.slim3.datastore.Attribute;
+import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
+import org.slim3.datastore.json.Json;
 
 @Model(schemaVersion = 1)
 public class Journal implements Serializable {
@@ -14,13 +16,19 @@ public class Journal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Attribute(primaryKey = true)
+    @Json(ignore = true)
     private Key key;
 
     @Attribute(version = true)
+    @Json(ignore = true)
     private Long version;
     
     private long journalId;
     private Date dateCreated = new Date();
+    
+    @Attribute(persistent = false)
+    private InverseModelListRef<MealJournal, Journal> mealJournalListRef = 
+        new InverseModelListRef<MealJournal, Journal>(MealJournal.class, "journalRef", this);
     
     public long getJournalId() {
         return journalId;
@@ -104,5 +112,9 @@ public class Journal implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public InverseModelListRef<MealJournal, Journal> getMealJournalListRef() {
+        return mealJournalListRef;
     }
 }

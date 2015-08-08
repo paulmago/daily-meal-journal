@@ -33,7 +33,7 @@ public class JournalService {
      * @return JournalDto - if transaction was unsuccessful, contains list of errors.
      */
     public JournalDto addJournal(JournalDto input) {
-        Journal journal = new Journal();
+        Journal journal = setModelValues(input);
 
         if(!this.dao.addJournal(journal)) {
             input.setErrorList(new ArrayList<String>());
@@ -58,6 +58,15 @@ public class JournalService {
      */
     public Journal getJournal(long journalId) {
         return this.dao.getJournal(journalId);
+    }
+    
+    /**
+     * Method used to retrieve a today's Journal.
+     * @param long journalId
+     * @return Journal.
+     */
+    public Journal getCurrentJournal() {
+        return this.dao.getJournal(new JournalDto().getDateCreated());
     }
 
     /**
