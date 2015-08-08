@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Roboto'; /*a name to be used later*/
+    src: url('fonts/Roboto-Regular.ttf'); /*URL to font*/
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    background-color: #3F51B5;
+    font-family: 'Roboto', sans-serif;
+}
+
+div {
+    margin: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+div img {
+    width: 192px;   
+}
+
+div h1 {
+    color: rgba(255, 255, 255, 0.87);
+    font-weight: 700;
+}
+
+div a, div a:active, div a:visited {
+    display: block;
+    margin: 20px auto;
+    padding: 8px 18px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #FF4081;
+    color: rgba(255, 255, 255, .87);
+    border-radius: 2px;
+    transition: background-color .3s;
+    text-transform: uppercase;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+div a:hover {
+    background-color: #FF80AB;
+}
