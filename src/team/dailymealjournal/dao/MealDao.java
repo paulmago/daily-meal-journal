@@ -14,7 +14,6 @@ import team.dailymealjournal.meta.MealMeta;
 import team.dailymealjournal.model.Meal;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Transaction;
 
 /**
@@ -36,8 +35,7 @@ public class MealDao {
         try {
             Transaction tx = Datastore.beginTransaction();
             //Manually allocate key
-            Key key = Datastore.allocateId(KeyFactory.createKey("Account", "Default"), "Meal");
-            mealModel.setKey(key);
+            Key key = Datastore.allocateId("Meal");
             mealModel.setMealId(key.getId());
             Datastore.put(mealModel);
             tx.commit();
@@ -53,8 +51,7 @@ public class MealDao {
      */
     public List<Meal> getAllMeals() {
         MealMeta meta = new MealMeta();
-        Key parentKey = KeyFactory.createKey("Account", "Default");
-        return Datastore.query(meta ,parentKey).asList();
+        return Datastore.query(meta).asList();
     }
     
     /**
@@ -64,9 +61,8 @@ public class MealDao {
      */
     public Meal getMeal(long mealId) {
         MealMeta meta = new MealMeta();
-        Key parentKey = KeyFactory.createKey("Account", "Default");
         FilterCriterion mainFilter = meta.mealId.equal(mealId);
-        return Datastore.query(meta ,parentKey).filter(mainFilter).asSingle();
+        return Datastore.query(meta).filter(mainFilter).asSingle();
     }
 
     /**

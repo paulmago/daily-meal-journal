@@ -18,6 +18,7 @@ import team.dailymealjournal.model.Meal;
  * @version 0.01
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/07/2015] 0.01 – Kim Agustin – Fixed edit service.
  */
 public class MealService {
 
@@ -67,6 +68,7 @@ public class MealService {
      */
     public MealDto editMeal(MealDto input) {
         Meal meal = setModelValues(input);
+        meal.setMealId(input.getMealId());
 
         if(!this.dao.editMeal(meal)) {
             input.setErrorList(new ArrayList<String>());

@@ -6,6 +6,7 @@ import com.google.appengine.api.datastore.Key;
 
 import org.slim3.datastore.Attribute;
 import org.slim3.datastore.Model;
+import org.slim3.datastore.json.Json;
 
 @Model(schemaVersion = 1)
 public class Meal implements Serializable {
@@ -13,9 +14,11 @@ public class Meal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Attribute(primaryKey = true)
+    @Json(ignore = true)
     private Key key;
 
     @Attribute(version = true)
+    @Json(ignore = true)
     private Long version;
     
     private long mealId;

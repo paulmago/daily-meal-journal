@@ -46,7 +46,7 @@ public class MealDto {
      * Default quantity of meal serving.
      */
     private int defaultQuantity;
-    
+        
     /**
      * Retrieve errorList
      * @return the errorList
