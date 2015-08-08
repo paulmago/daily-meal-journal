@@ -56,7 +56,7 @@ app.controller('defaultController', ['$scope', '$mdSidenav', function ($scope, $
 // MEALS LISTING
 app.controller('adminMealsController', ['$scope', '$http', function ($scope, $http) {
     $http
-        .get('http://localhost:8888/meal')
+        .get('/meals')
         .success(function (response) {
             $scope.meals = response;
         });
@@ -80,10 +80,9 @@ app.controller('adminMealsController', ['$scope', '$http', function ($scope, $ht
 // MEAL DETAILS
 app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSerializerJQLike', '$routeParams', '$mdDialog', '$mdToast', function ($scope, $http, $httpParamSerializerJQLike, $routeParams, $mdDialog, $mdToast) {
     var mealId = $routeParams.mealId;
-    //var uri = 'http://localhost:8888/meal?id=' + mealId;
 
     $http({
-        url : 'http://localhost:8888/meal', 
+        url : '/meals', 
         method : "GET",
         params : {id : mealId}
     }).success(function (response) {
@@ -133,7 +132,7 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
             $http
                 ({
                     method: 'DELETE',
-                    url: 'http://localhost:8888/meal/delete',
+                    url: '/meals',
                     params: mealData
                 })
                 .success(function (data, status, headers, config) {
@@ -178,9 +177,9 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
             $http
                 ({
                     method: 'PUT',
-                    url: 'http://localhost:8888/meal/edit',
+                    url: '/meals',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    data: $httpParamSerializerJQLike(mealData)
+                    data: $httpParamSerializerJQLike({'data' : JSON.stringify(mealData)})
                 })
                 .success(function (data, status, headers, config) {
                     $mdToast.show(
@@ -255,9 +254,9 @@ app.controller('adminAddMealController', ['$scope', '$http', '$httpParamSerializ
             $http
                 ({
                     method: 'POST',
-                    url: 'http://localhost:8888/meal/add',
+                    url: '/meals',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    data: $httpParamSerializerJQLike(mealData)
+                    data: $httpParamSerializerJQLike({'data' : JSON.stringify(mealData)})
                 })
                 .success(function (data, status, headers, config) {
                     $mdToast.show(

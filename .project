@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Daily Meal Journal</name>
+	<name>slim3-blank</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/com.google.appengine.eclipse.core.enhancerbuilder.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/com.google.appengine.eclipse.core.enhancerbuilder (3).launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -26,7 +26,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/com.google.appengine.eclipse.core.projectValidator.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/com.google.appengine.eclipse.core.projectValidator (2).launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
