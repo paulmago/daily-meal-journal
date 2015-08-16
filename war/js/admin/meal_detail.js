@@ -59,6 +59,7 @@ $(document).on('click','#delete',function() {
 		url: '/meals?id='+getURLParameter('id'),
 		success: function(data,status,jqXHR) {
 			if(data.errorList.length==0) {
+				//window.location.href = '/admin/meals';
 				alert('Success!');
 			} else {
 				var msg = "";
@@ -71,6 +72,7 @@ $(document).on('click','#delete',function() {
 		}
 	});
 });
+
 
 /*
  * Edit Meal
@@ -85,7 +87,7 @@ $(document).on('click','#accept',function() {
 				name: $('#mealname').val(),
 				unit: $('#mealunit').val(),
 			})
-	};s
+	};
 	$.ajax({
 		type:'PUT',
 		url: '/meals',
@@ -93,6 +95,7 @@ $(document).on('click','#accept',function() {
 		dataType:'json',
 		success: function(data,status,jqXHR) {
 			if(data.errorList.length==0) {
+				//window.location.href = '/admin/meals';
 				alert('Success!');
 			} else {
 				var msg = "";
