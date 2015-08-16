@@ -1,5 +1,6 @@
 package team.dailymealjournal.controller.admin;
 
+
 import org.slim3.controller.Controller;
 import org.slim3.controller.Navigation;
 

@@ -68,7 +68,7 @@ public class MealsController extends Controller {
                 if (isDelete()) {
                     mealJson = new JSONObject();
                     
-                    dto.setMealId(this.asLong("mealId"));
+                    dto.setMealId(this.asLong("id"));
                     dto = service.deleteMeal(dto);
                 } else {
                     mealJson = new JSONObject((String) this.requestScope("data"));

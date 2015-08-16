@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/material-icons/material-icons.css" rel="stylesheet" type="text/css">
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+        <link href="/css/admin.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <nav>
+            <div class="sidenav-header">
+                <img src="/svg/lunch4.svg" alt="logo" />
+                <h1>Daily Meal Journal</h1>
+            </div>
+            <div class="list">
+                <a class="list-item" href="/">
+                    <i class="material-icon black-text">home</i>
+                    <p>Home</p>
+                </a>
+                <a class="list-item active" href="meals">
+                    <img src="/svg/cutlery6.svg" class="material-icon">
+                    <p>Meals</p>
+                </a>
+            </div>
+        </nav>
+        <main>
+            <div class="toolbar">
+                <div class="toolbar-tools">
+                    <a class="toolbar-action" href="meals"><i class="material-icon">arrow_back</i></a>
+                    <span class="stretch"></span>
+                    <a id="accept" class="toolbar-action" href="meals"><i class="material-icon">check</i></a>
+                </div>
+                <div class="toolbar-tools-bottom">
+                    <span class="toolbar-title">Meal Specifications</span>
+                </div>
+            </div>
+            
+            <form id="meal_detail" class="cool-form">
+             <!-- 
+                <div class="input-group">
+                    <label>Meal Name</label>
+                    <input type="text" name="meal_name">
+                </div>
+                <div class="input-group">
+                    <label>Default Quantity</label>
+                    <input type="text" name="meal_name">
+                </div>
+                <div class="input-group">
+                    <label>Unit</label>
+                    <input type="text" name="meal_name">
+                </div>
+                <div class="input-group">
+                    <label>Calorie count</label>
+                    <input type="text" name="meal_name">
+                </div>
+                <div class="error-messages">
+                	<!-- use jQuery to place error messages in here 
+                </div>
+                -->
+            </form>
+        </main>
+        <script src="/js/jquery-2.1.3.min.js"></script>
+        <script src="/js/admin/meal_add.js"></script>
+    </body>
+</html>
