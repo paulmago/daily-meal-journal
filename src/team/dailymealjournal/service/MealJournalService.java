@@ -102,7 +102,14 @@ public class MealJournalService {
             input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
-
+        
+        Journal currentJournal = journalService.getCurrentJournal();
+        if(null != currentJournal && currentJournal.getMealJournalListRef().getModelList().size() < 1)
+        {
+            JournalDto currentJournalDto = new JournalDto();
+            currentJournalDto.setJournalId(currentJournal.getJournalId());
+            journalService.deleteJournal(currentJournalDto);
+        }
         return input;
     }
     

@@ -18,6 +18,7 @@ import org.slim3.repackaged.org.json.JSONObject;
 import team.dailymealjournal.dto.MealJournalDto;
 import team.dailymealjournal.model.Journal;
 import team.dailymealjournal.model.Meal;
+import team.dailymealjournal.model.MealJournal;
 import team.dailymealjournal.meta.MealJournalMeta;
 import team.dailymealjournal.service.JournalService;
 import team.dailymealjournal.service.MealJournalService;
@@ -26,11 +27,12 @@ import team.dailymealjournal.service.MealService;
 /**
  * Service used to handle journal & meal journal transactions.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.04
  * Version History
  * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
  * [08/07/2015] 0.02 – Kim Agustin – Refactored controller to handle meal journal transactions (GET)
- * [08/08/2015] 0.02 – Kim Agustin – Added POST, PUT, DELETE methods
+ * [08/08/2015] 0.03 – Kim Agustin – Added POST, PUT, DELETE methods
+ * [08/17/2015] 0.04 – Kim Agustin – Fixed GET by meal journal ID
  */
 public class JournalsController extends Controller {
     
@@ -55,9 +57,12 @@ public class JournalsController extends Controller {
         if (isGet()) {
             if(null != requestScope("id")) {
                 long id = asLong("id");
-                Journal journal = journalService.getJournal(id);
-                if (null != journal)
-                    json = journalToJson(journal).toString();
+                MealJournal mealJournal = mealJournalService.getMealJournal(id);
+                if (null != mealJournal) {
+                    JSONObject mealJournalJson = new JSONObject(MealJournalMeta.get().modelToJson(mealJournal));
+                    populateJournalJsonWithMeals(mealJournalJson);
+                    json = mealJournalJson.toString();
+                }
             }
             else {
                 List<Journal> journalList = journalService.getJournalList();

@@ -42,7 +42,7 @@ public class MealsController extends Controller {
 
     @Override
     public Navigation run() throws Exception {
-        response.setContentType("application/mealJson");
+        response.setContentType("application/json");
         
         MealDto dto = new MealDto();
         JSONObject mealJson = null;

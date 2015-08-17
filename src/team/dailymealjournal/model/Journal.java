@@ -2,6 +2,7 @@ package team.dailymealjournal.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -27,8 +28,12 @@ public class Journal implements Serializable {
     private Date dateCreated = new Date();
     
     @Attribute(persistent = false)
+    @Json(ignore = true)
     private InverseModelListRef<MealJournal, Journal> mealJournalListRef = 
         new InverseModelListRef<MealJournal, Journal>(MealJournal.class, "journalRef", this);
+    
+    @Attribute(lob = true)
+    private List<MealJournal> mealJournals;
     
     public long getJournalId() {
         return journalId;
@@ -116,5 +121,13 @@ public class Journal implements Serializable {
 
     public InverseModelListRef<MealJournal, Journal> getMealJournalListRef() {
         return mealJournalListRef;
+    }
+
+    public List<MealJournal> getMealJournals() {
+        return mealJournals;
+    }
+
+    public void setMealJournals(List<MealJournal> mealJournals) {
+        this.mealJournals = mealJournals;
     }
 }
