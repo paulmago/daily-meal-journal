@@ -17,9 +17,11 @@ import team.dailymealjournal.model.MealJournal;
 /**
  * Service used to handle mealJournal transactions.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.03
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/17/2015] 0.02 – Kim Agustin – Added support for cascading delete.
+ * [08/17/2015] 0.03 – Kim Agustin – Fixed edit bug
  */
 public class MealJournalService {
 
@@ -80,6 +82,7 @@ public class MealJournalService {
      */
     public MealJournalDto editMealJournal(MealJournalDto input) {
         MealJournal mealJournal = setModelValues(input);
+        mealJournal.setMealJournalId(input.getMealJournalId());
 
         if(!this.dao.editMealJournal(mealJournal)) {
             input.setErrorList(new ArrayList<String>());
