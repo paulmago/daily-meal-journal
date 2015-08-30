@@ -82,7 +82,6 @@ public class MealJournalService {
         mealJournal.setMealJournalId(input.getMealJournalId());
 
         if(!this.dao.editMealJournal(mealJournal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 
@@ -99,13 +98,17 @@ public class MealJournalService {
         mealJournal.setMealJournalId(input.getMealJournalId());
         
         if(!this.dao.deleteMealJournal(mealJournal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
         
         return input;
     }
     
+    /**
+     * Method used to transfer values from DTO to model.
+     * @param input - container of values from request.
+     * @return MealJournal - model with all values from DTO.
+     */
     private MealJournal setModelValues(MealJournalDto input) {
         MealJournal mealJournal = new MealJournal();
         mealJournal.setMealId(input.getMealId());

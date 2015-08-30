@@ -95,6 +95,11 @@ public class MealService {
         return input;
     }
     
+    /**
+     * Method used to transfer values from DTO to model.
+     * @param input - container of values from request.
+     * @return Meal - model with all values from DTO.
+     */
     private Meal setModelValues(MealDto input) {
         Meal meal = new Meal();
         meal.setName(input.getName());

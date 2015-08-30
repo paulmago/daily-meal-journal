@@ -17,9 +17,10 @@ import team.dailymealjournal.model.Journal;
 /**
  * Service used to handle journal transactions.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.02
  * Version History
  * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/30/2015] 0.02 – Kim Agustin – Added static method to get current date.
  */
 public class JournalService {
 
@@ -104,12 +105,21 @@ public class JournalService {
         return input;
     }
     
+    /**
+     * Method used to transfer values from DTO to model.
+     * @param input - container of values from request.
+     * @return Journal - model with all values from DTO.
+     */
     private Journal setModelValues(JournalDto input) {
         Journal journal = new Journal();
         journal.setDateCreated(input.getDateCreated());
         return journal;
     }
     
+    /**
+     * Method used to get current date.
+     * @return Date - current date.
+     */
     public static Date getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.AM_PM, Calendar.AM);
