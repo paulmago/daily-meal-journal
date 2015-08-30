@@ -5,6 +5,7 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class JournalDto {
     /**
      * List of errors.
      */
-    private List<String> errorList;
+    private List<String> errorList = new ArrayList<String>();
     
     /**
      * Journal ID.
