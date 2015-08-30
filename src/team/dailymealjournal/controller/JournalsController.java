@@ -123,17 +123,7 @@ public class JournalsController extends Controller {
         return jsonList;
     }
     
-    private static JSONObject journalToJson(Journal journal) throws Exception {
-        JSONObject json = new JSONObject();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(journal.getDateCreated());
-        json.put("dateCreated", calendar.getTimeInMillis());
-        json.put("journals", new JSONArray(MealJournalMeta.get().modelsToJson(journal.getMealJournalListRef().getModelList())));
-        populateJournalJsonWithMeals(json);
-        return json;
-    }
-    
-    private static boolean populateJournalsJson(JSONArray jsonList) throws Exception{
+    private static boolean populateJournalsJson(JSONArray jsonList) throws Exception {
         boolean succesful = false;
         for (int i = 0, count = jsonList.length(); i < count; i++) {
             JSONArray journals = jsonList.getJSONObject(i).getJSONArray("journals");
@@ -144,7 +134,7 @@ public class JournalsController extends Controller {
         return succesful;
     }
     
-    private static boolean populateJournalJsonWithMeals(JSONObject journal) throws Exception{
+    private static boolean populateJournalJsonWithMeals(JSONObject journal) throws Exception {
         boolean succesful = false;
         MealService mealService = new MealService();
         Meal meal = mealService.getMeal(journal.getLong("mealId"));

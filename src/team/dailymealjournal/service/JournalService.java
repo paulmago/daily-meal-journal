@@ -6,6 +6,8 @@
 package team.dailymealjournal.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import team.dailymealjournal.dao.JournalDao;
@@ -66,7 +68,7 @@ public class JournalService {
      * @return Journal.
      */
     public Journal getCurrentJournal() {
-        return this.dao.getJournal(new JournalDto().getDateCreated());
+        return this.dao.getJournal(getCurrentDate());
     }
 
     /**
@@ -106,6 +108,16 @@ public class JournalService {
         Journal journal = new Journal();
         journal.setDateCreated(input.getDateCreated());
         return journal;
+    }
+    
+    public static Date getCurrentDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.AM_PM, Calendar.AM);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
     }
 
 }

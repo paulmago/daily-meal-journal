@@ -13,6 +13,7 @@ import org.slim3.datastore.FilterCriterion;
 import team.dailymealjournal.meta.MealJournalMeta;
 import team.dailymealjournal.model.Journal;
 import team.dailymealjournal.model.MealJournal;
+import team.dailymealjournal.service.JournalService;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
@@ -20,14 +21,17 @@ import com.google.appengine.api.datastore.Transaction;
 /**
 * Dao used to access the datastore for mealJournal transactions.s
 * @author Kim Agustin
-* @version 0.01
+* @version 0.03
 * Version History
 * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
+* [08/30/2015] 0.02 – Kim Agustin – Updated addMealJournal algorithm.
+* [08/30/2015] 0.03 – Kim Agustin – Changed deleteMealJournal into cascading.
 */
 public class MealJournalDao {
 
     /**
      * Method used to save a mealJournal.
+     * @param JournalModel - Today's date, if already in datastore.
      * @param MealJournalModel - MealJournal to be saved.
      * @return Boolean - true, if mealJournal is saved; otherwise, false.
      */
@@ -35,7 +39,15 @@ public class MealJournalDao {
         boolean result = true;
         try {
             Transaction tx = Datastore.beginTransaction();
-            //Manually allocate key
+            if (null == journalModel) {
+                // if first entry for the day, create new journal
+                Key parentKey = Datastore.allocateId(Journal.class);
+                journalModel = new Journal();
+                journalModel.setKey(parentKey);
+                journalModel.setJournalId(parentKey.getId());
+                journalModel.setDateCreated(JournalService.getCurrentDate());
+            }
+            // Manually allocate key
             Key key = Datastore.allocateId(journalModel.getKey(), MealJournal.class);
             mealJournalModel.setKey(key);
             mealJournalModel.setMealJournalId(key.getId());
@@ -107,9 +119,20 @@ public class MealJournalDao {
 
         try {
             MealJournal originalMealJournalModel = Datastore.query(meta).filter(mainFilter).asSingle();
+                        
             if (originalMealJournalModel != null) {
+                // find out if parent should be deleted or not
+                boolean deleteAll = true;
+                Journal journal = new JournalService().getJournal(originalMealJournalModel.getKey().getParent().getId());
+                if (journal.getMealJournalListRef().getModelList().size() > 1) {
+                    deleteAll = false;
+                }
+                
                 Transaction tx = Datastore.beginTransaction();
-                Datastore.delete(originalMealJournalModel.getKey());
+                if (deleteAll)
+                    Datastore.deleteAll(originalMealJournalModel.getKey().getParent());
+                else
+                    Datastore.delete(originalMealJournalModel.getKey());
                 tx.commit();
             } else {
                 result = false;
