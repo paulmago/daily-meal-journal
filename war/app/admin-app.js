@@ -8,7 +8,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             'controller': 'adminMealsController'
         })
         .when('/meals/add', {
-            'templateUrl': 'admin/meal_add.html',
+            'templateUrl': 'admin/meal_add_new.html',
             'controller': 'adminAddMealController'
         })
         .when('/meals/:mealId', {
