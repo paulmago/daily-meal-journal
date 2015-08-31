@@ -3,6 +3,8 @@ package team.dailymealjournal.validator;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slim3.controller.validator.Errors;
 import org.slim3.controller.validator.Validator;
 import org.slim3.controller.validator.Validators;
@@ -33,6 +35,14 @@ public class JSONValidators extends Validators {
      */
     public JSONValidators(JSONObject parameters) throws NullPointerException, JSONException {
         super(Util.jsonToMap(parameters));
+    }
+    
+    /**
+     * Constructor that accepts HttpServletRequest.
+     * @param HttpServletRequest parameters - inputs to be validated.
+     */
+    public JSONValidators(HttpServletRequest parameters) {
+        super(parameters);
     }
     
     /**
