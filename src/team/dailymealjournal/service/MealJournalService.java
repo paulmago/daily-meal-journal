@@ -5,7 +5,6 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import team.dailymealjournal.dao.MealJournalDao;
@@ -48,7 +47,6 @@ public class MealJournalService {
         Journal currentJournal = journalService.getCurrentJournal();
 
         if(!this.dao.addMealJournal(currentJournal, mealJournal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 

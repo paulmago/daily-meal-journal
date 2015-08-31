@@ -5,7 +5,6 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import team.dailymealjournal.dao.MealDao;
@@ -15,10 +14,10 @@ import team.dailymealjournal.model.Meal;
 /**
  * Service used to handle meal transactions.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.02
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
- * [08/07/2015] 0.01 – Kim Agustin – Fixed edit service.
+ * [08/07/2015] 0.02 – Kim Agustin – Fixed edit service.
  */
 public class MealService {
 
@@ -37,7 +36,6 @@ public class MealService {
         Meal meal = setModelValues(input);
 
         if(!this.dao.addMeal(meal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 
@@ -71,7 +69,6 @@ public class MealService {
         meal.setMealId(input.getMealId());
 
         if(!this.dao.editMeal(meal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 
@@ -88,7 +85,6 @@ public class MealService {
         meal.setMealId(input.getMealId());
 
         if(!this.dao.deleteMeal(meal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 

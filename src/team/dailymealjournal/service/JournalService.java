@@ -81,7 +81,6 @@ public class JournalService {
         Journal journal = setModelValues(input);
 
         if(!this.dao.editJournal(journal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 
@@ -98,7 +97,6 @@ public class JournalService {
         journal.setJournalId(input.getJournalId());
 
         if(!this.dao.deleteJournal(journal)) {
-            input.setErrorList(new ArrayList<String>());
             input.getErrorList().add("database error!");
         }
 
