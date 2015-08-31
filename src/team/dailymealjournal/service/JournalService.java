@@ -5,7 +5,6 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +16,11 @@ import team.dailymealjournal.model.Journal;
 /**
  * Service used to handle journal transactions.
  * @author Kim Agustin
- * @version 0.02
+ * @version 0.03
  * Version History
  * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
  * [08/30/2015] 0.02 – Kim Agustin – Added static method to get current date.
+ * [08/31/2015] 0.03 – Kim Agustin – Changed message on DAO operation failure.
  */
 public class JournalService {
 
@@ -39,8 +39,7 @@ public class JournalService {
         Journal journal = setModelValues(input);
 
         if(!this.dao.addJournal(journal)) {
-            input.setErrorList(new ArrayList<String>());
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
@@ -81,7 +80,7 @@ public class JournalService {
         Journal journal = setModelValues(input);
 
         if(!this.dao.editJournal(journal)) {
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
@@ -97,7 +96,7 @@ public class JournalService {
         journal.setJournalId(input.getJournalId());
 
         if(!this.dao.deleteJournal(journal)) {
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;

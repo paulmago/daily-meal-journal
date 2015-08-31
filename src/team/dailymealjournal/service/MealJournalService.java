@@ -15,13 +15,14 @@ import team.dailymealjournal.model.MealJournal;
 /**
  * Service used to handle mealJournal transactions.
  * @author Kim Agustin
- * @version 0.04
+ * @version 0.06
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
  * [08/17/2015] 0.02 – Kim Agustin – Added support for cascading delete.
  * [08/17/2015] 0.03 – Kim Agustin – Fixed edit bug
  * [08/30/2015] 0.04 – Kim Agustin – Removed cascading delete because of semantic bug.
  * [08/30/2015] 0.05 – Kim Agustin – Changed adding journal and moved creating of new journal to DAO.
+ * [08/31/2015] 0.06 – Kim Agustin – Changed message on DAO operation failure.
  */
 public class MealJournalService {
 
@@ -47,7 +48,7 @@ public class MealJournalService {
         Journal currentJournal = journalService.getCurrentJournal();
 
         if(!this.dao.addMealJournal(currentJournal, mealJournal)) {
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
@@ -80,7 +81,7 @@ public class MealJournalService {
         mealJournal.setMealJournalId(input.getMealJournalId());
 
         if(!this.dao.editMealJournal(mealJournal)) {
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
@@ -96,7 +97,7 @@ public class MealJournalService {
         mealJournal.setMealJournalId(input.getMealJournalId());
         
         if(!this.dao.deleteMealJournal(mealJournal)) {
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
         
         return input;
