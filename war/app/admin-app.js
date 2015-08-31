@@ -88,9 +88,9 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
     }).success(function (response) {
         var meal = response;
         $scope.mealName = meal.name;
-        $scope.defaultQuantity = meal.defaultQuantity;
+        $scope.defaultQuantity = meal.defaultQuantity + '';
         $scope.unit = meal.unit;
-        $scope.calories = meal.calories;
+        $scope.calories = meal.calories + '';
     });
 
     $scope.ui = {
@@ -136,7 +136,7 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
                     params: mealData
                 })
                 .success(function (data, status, headers, config) {
-                	if(data.errorList == []) {
+                	if(data.errorList == null) {
 	                    $mdToast.show(
 	                        $mdToast.simple()
 	                        .content('Meal Deleted!')
@@ -196,7 +196,7 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
                     data: $httpParamSerializerJQLike({'data' : JSON.stringify(mealData)})
                 })
                 .success(function (data, status, headers, config) {
-                	if(data.errorList == []) {
+                	if(data.errorList == null) {
 	                    $mdToast.show(
 	                        $mdToast.simple()
 	                        .content('Meal Updated!')
@@ -287,7 +287,7 @@ app.controller('adminAddMealController', ['$scope', '$http', '$httpParamSerializ
                     data: $httpParamSerializerJQLike({'data' : JSON.stringify(mealData)})
                 })
                 .success(function (data, status, headers, config) {
-                	if(data.errorList == []) {
+                	if(data.errorList == null) {
 	                    $mdToast.show(
 	                        $mdToast.simple()
 	                        .content('Meal Added!')

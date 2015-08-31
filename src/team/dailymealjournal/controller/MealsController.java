@@ -160,7 +160,7 @@ public class MealsController extends Controller {
         JSONValidators validators = new JSONValidators(this.request);
         
         try {
-            validators.add("data", validators.required("Request must be done with post data."));
+            validators.add("data", validators.required("Request must be done with put data."));
             if (validators.validate()) {
                 mealJson = new JSONObject((String) this.requestScope("data"));
                 
@@ -176,7 +176,7 @@ public class MealsController extends Controller {
                     dto.setDefaultQuantity(mealJson.getInt("defaultQuantity"));
                     dto.setCalories(mealJson.getDouble("calories"));
                     dto.setUnit(mealJson.getString("unit"));
-                    dto.setUnit(mealJson.getString("mealId"));
+                    dto.setMealId(mealJson.getLong("mealId"));
                     dto = this.service.editMeal(dto);
                 }
             }
