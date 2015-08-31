@@ -16,15 +16,17 @@ import team.dailymealjournal.dto.MealDto;
 import team.dailymealjournal.model.Meal;
 import team.dailymealjournal.meta.MealMeta;
 import team.dailymealjournal.service.MealService;
+import team.dailymealjournal.validator.JSONValidators;
 
 /**
  * Service used to handle meal transactions.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.04
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
- * [08/07/2015] 0.02 - Kim Agustin - Migration to slim3_1.0.16
- * [08/07/2015] 0.03 - Kim Agustin - Merged CRUD controllers into one
+ * [08/07/2015] 0.02 – Kim Agustin – Migration to slim3_1.0.16.
+ * [08/07/2015] 0.03 – Kim Agustin – Merged CRUD controllers into one.
+ * [08/31/2015] 0.04 – Kim Agustin – Added validation support.
  */
 public class MealsController extends Controller {
     
@@ -73,25 +75,37 @@ public class MealsController extends Controller {
                 } else {
                     mealJson = new JSONObject((String) this.requestScope("data"));
                     
-                    dto.setName(mealJson.getString("name"));
-                    dto.setDefaultQuantity(mealJson.getInt("defaultQuantity"));
-                    dto.setCalories(mealJson.getInt("calories"));
-                    dto.setUnit(mealJson.getString("unit"));
-                    
+                    JSONValidators v = new JSONValidators(mealJson);
+                    v.add("name", v.required());
+                    v.add("unit", v.required());
+                    v.add("calories", v.required(), v.doubleType());
+                    v.add("defaultQuantity", v.required(), v.integerType());
                     if (isPut()) {
-                        dto.setMealId(mealJson.getLong("mealId"));
-                        dto = service.editMeal(dto);
-                    } else
-                        dto = this.service.addMeal(dto);
+                        v.add("mealId", v.required(), v.longType());
+                    }
+                    if (v.validate()) {
+                        dto.setName(mealJson.getString("name"));
+                        dto.setDefaultQuantity(mealJson.getInt("defaultQuantity"));
+                        dto.setCalories(mealJson.getDouble("calories"));
+                        dto.setUnit(mealJson.getString("unit"));
+                        
+                        if (isPut()) {
+                            dto.setMealId(mealJson.getLong("mealId"));
+                            dto = service.editMeal(dto);
+                        } else
+                            dto = this.service.addMeal(dto);
+                    } else {
+                        v.addErrorsTo(dto.getErrorList());
+                    }
                 }
             } catch (Exception e) {
                 dto.getErrorList().add("Server controller error: " + e.getMessage());
-                if (mealJson == null) {
-                    mealJson = new JSONObject();
-                    mealJson.put("errorList", dto.getErrorList());
-                }
             }
             
+            if (dto.getErrorList().size() > 0) {
+                mealJson = new JSONObject();
+                mealJson.put("errorList", dto.getErrorList());
+            }
             json = mealJson.toString();
         }
         response.getWriter().write(json);
