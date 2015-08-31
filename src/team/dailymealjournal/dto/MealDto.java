@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DTO used to store a single meal for
- * admin side operations.
+ * DTO used to store a single meal for admin side operations.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.02
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/31/2015] 0.02 – Kim Agustin – Changed calories from int to double.
  */
 public class MealDto {
 
@@ -41,7 +41,7 @@ public class MealDto {
     /**
      * Quantitative measure of meal calories.
      */
-    private int calories;
+    private double calories;
     
     /**
      * Default quantity of meal serving.
@@ -116,7 +116,7 @@ public class MealDto {
      * Retrieve calories
      * @return the calories
      */
-    public int getCalories() {
+    public double getCalories() {
         return calories;
     }
     
@@ -124,7 +124,7 @@ public class MealDto {
      * Set calories
      * @param calories the calories to set
      */
-    public void setCalories(int calories) {
+    public void setCalories(double calories) {
         this.calories = calories;
     }
     
