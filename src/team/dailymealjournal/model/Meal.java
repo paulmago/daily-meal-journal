@@ -9,7 +9,7 @@ import org.slim3.datastore.Model;
 import org.slim3.datastore.json.Json;
 
 /**
- * Service used to handle meal transactions.
+ * Model for meal.
  * @author Kim Agustin
  * @version 0.03
  * Version History
@@ -20,21 +20,50 @@ import org.slim3.datastore.json.Json;
 @Model(schemaVersion = 1)
 public class Meal implements Serializable {
 
+    /**
+     * Serial version UID
+     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Datastore Key
+     */
     @Attribute(primaryKey = true)
     @Json(ignore = true)
     private Key key;
 
+    /**
+     * Version
+     */
     @Attribute(version = true)
     @Json(ignore = true)
     private Long version;
     
+    /**
+     * Meal ID - allocated by key.
+     */
     private long mealId;
+    
+    /**
+     * Meal name - name of the meal.
+     */
     private String name;
+    
+    /**
+     * Meal unit - unit of the meal.
+     * eg. piece, slice, serving, etc. 
+     */
     private String unit;
-    private double calories;
+    
+    /**
+     * Meal default quantity - default quantity of meal when adding a meal to the journal.
+     */
     private int defaultQuantity;
+    
+    /**
+     * Meal calories - amount of calories based on the default quantity.
+     */
+    private double calories;
 
     /**
      * Returns the key.

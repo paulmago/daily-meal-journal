@@ -10,47 +10,57 @@ import org.slim3.datastore.InverseModelListRef;
 import org.slim3.datastore.Model;
 import org.slim3.datastore.json.Json;
 
+/**
+ * Model for journal date.
+ * @author Kim Agustin
+ * @version 0.02
+ * Version History
+ * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/31/2015] 0.02 – Kim Agustin – Added documentation.
+ */
 @Model(schemaVersion = 1)
 public class Journal implements Serializable {
 
+    /**
+     * Serial version UID
+     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Datastore Key
+     */
     @Attribute(primaryKey = true)
     @Json(ignore = true)
     private Key key;
 
+    /**
+     * Version
+     */
     @Attribute(version = true)
     @Json(ignore = true)
     private Long version;
     
+    /**
+     * Journal ID - allocated by key.
+     */
     private long journalId;
-    private Date dateCreated = new Date();
     
+    /**
+     * Journal date created - date when the journal was added.
+     */
+    private Date dateCreated;
+    
+    /**
+     * MealJournal references - reference that indicate that Journal is the ancestor of MealJournal.
+     */
     @Attribute(persistent = false)
     @Json(ignore = true)
     private InverseModelListRef<MealJournal, Journal> mealJournalListRef = 
         new InverseModelListRef<MealJournal, Journal>(MealJournal.class, "journalRef", this);
         
-    public long getJournalId() {
-        return journalId;
-    }
-
-    public void setJournalId(long journalId) {
-        this.journalId = journalId;
-    }
-    
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
     /**
      * Returns the key.
-     *
-     * @return the key
+     * @return key
      */
     public Key getKey() {
         return key;
@@ -58,9 +68,7 @@ public class Journal implements Serializable {
 
     /**
      * Sets the key.
-     *
      * @param key
-     *            the key
      */
     public void setKey(Key key) {
         this.key = key;
@@ -68,8 +76,7 @@ public class Journal implements Serializable {
 
     /**
      * Returns the version.
-     *
-     * @return the version
+     * @return version
      */
     public Long getVersion() {
         return version;
@@ -77,14 +84,55 @@ public class Journal implements Serializable {
 
     /**
      * Sets the version.
-     *
      * @param version
-     *            the version
      */
     public void setVersion(Long version) {
         this.version = version;
     }
+    
+    /**
+     * Returns the journal ID.
+     * @return journalId
+     */
+    public long getJournalId() {
+        return journalId;
+    }
 
+    /**
+     * Sets the journal ID.
+     * @param journalId
+     */
+    public void setJournalId(long journalId) {
+        this.journalId = journalId;
+    }
+    
+    /**
+     * Returns the date the journal was created.
+     * @return dateCreated
+     */
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    /**
+     * Sets the date the journal was created.
+     * @param dateCreated
+     */
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+    
+    /**
+     * Returns the list of references to the journal's children.
+     * @return mealJournalListRef
+     */
+    public InverseModelListRef<MealJournal, Journal> getMealJournalListRef() {
+        return mealJournalListRef;
+    }
+
+    /**
+     * Auto-generated function
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -93,6 +141,9 @@ public class Journal implements Serializable {
         return result;
     }
 
+    /**
+     * Auto-generated function
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -113,9 +164,5 @@ public class Journal implements Serializable {
             return false;
         }
         return true;
-    }
-
-    public InverseModelListRef<MealJournal, Journal> getMealJournalListRef() {
-        return mealJournalListRef;
     }
 }
