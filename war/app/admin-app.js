@@ -8,7 +8,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             'controller': 'adminMealsController'
         })
         .when('/meals/add', {
-            'templateUrl': 'admin/meal_add_new.html',
+            'templateUrl': 'admin/meal_add.html',
             'controller': 'adminAddMealController'
         })
         .when('/meals/:mealId', {
@@ -167,9 +167,9 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
         if ($scope.editMealForm.$valid) {
             var mealData =
                 {
-                    'mealId' : parseInt(mealId),
-                    'calories' : parseInt($scope.calories),
-                    'defaultQuantity' : parseInt($scope.defaultQuantity),
+                    'mealId' : mealId,
+                    'calories' : $scope.calories,
+                    'defaultQuantity' : $scope.defaultQuantity,
                     'unit' : $scope.unit,
                     'name' : $scope.mealName
                 };
@@ -245,8 +245,8 @@ app.controller('adminAddMealController', ['$scope', '$http', '$httpParamSerializ
         if ($scope.addMealForm.$valid) {
             var mealData =
                 {
-                    'calories' : parseInt($scope.calories),
-                    'defaultQuantity' : parseInt($scope.defaultQuantity),
+                    'calories' : $scope.calories,
+                    'defaultQuantity' : $scope.defaultQuantity,
                     'unit' : $scope.unit,
                     'name' : $scope.mealName
                 };
