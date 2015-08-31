@@ -136,13 +136,27 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
                     params: mealData
                 })
                 .success(function (data, status, headers, config) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                        .content('Meal Deleted!')
-                        .hideDelay(1000)
-                        .position($scope.getToastPosition())
-                    );
-                    window.location = window.location.href.split('#')[0] + '#/meals';
+                	if(data.errorList == []) {
+	                    $mdToast.show(
+	                        $mdToast.simple()
+	                        .content('Meal Deleted!')
+	                        .hideDelay(1000)
+	                        .position($scope.getToastPosition())
+	                    );
+	                    window.location = window.location.href.split('#')[0] + '#/meals';
+                	} else {
+                		var alert = $mdDialog.alert()
+                        .parent(angular.element(document.body))
+                        .title('Invalid data error')
+                        .content(data.errorList)
+                        .ariaLabel('Deleting a meal server error')
+                        .ok('Okay')
+                        .targetEvent(ev);
+                    
+	                    $mdDialog.show(alert).then(function () {
+	                        // do nothing
+	                    });
+                	}
                 })
                 .error(function (data, status, headers, config) {
                     var alert = $mdDialog.alert()
@@ -167,11 +181,11 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
         if ($scope.editMealForm.$valid) {
             var mealData =
                 {
-                    'mealId' : mealId,
                     'calories' : $scope.calories,
                     'defaultQuantity' : $scope.defaultQuantity,
                     'unit' : $scope.unit,
-                    'name' : $scope.mealName
+                    'name' : $scope.mealName,
+                    'mealId' : mealId
                 };
 
             $http
@@ -182,13 +196,27 @@ app.controller('adminEditMealController', ['$scope', '$http', '$httpParamSeriali
                     data: $httpParamSerializerJQLike({'data' : JSON.stringify(mealData)})
                 })
                 .success(function (data, status, headers, config) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                        .content('Meal Updated!')
-                        .hideDelay(1000)
-                        .position($scope.getToastPosition())
-                    );
-                    window.location = window.location.href.split('#')[0] + '#/meals';
+                	if(data.errorList == []) {
+	                    $mdToast.show(
+	                        $mdToast.simple()
+	                        .content('Meal Updated!')
+	                        .hideDelay(1000)
+	                        .position($scope.getToastPosition())
+	                    );
+	                    window.location = window.location.href.split('#')[0] + '#/meals';
+	                } else {
+	            		var alert = $mdDialog.alert()
+	                    .parent(angular.element(document.body))
+	                    .title('Invalid data error')
+	                    .content(data.errorList)
+	                    .ariaLabel('Updating a meal server error')
+	                    .ok('Okay')
+	                    .targetEvent(ev);
+	                
+	                    $mdDialog.show(alert).then(function () {
+	                        // do nothing
+	                    });
+	            	}
                 })
                 .error(function (data, status, headers, config) {
                     var alert = $mdDialog.alert()
@@ -259,13 +287,27 @@ app.controller('adminAddMealController', ['$scope', '$http', '$httpParamSerializ
                     data: $httpParamSerializerJQLike({'data' : JSON.stringify(mealData)})
                 })
                 .success(function (data, status, headers, config) {
-                    $mdToast.show(
-                        $mdToast.simple()
-                        .content('Meal Added!')
-                        .hideDelay(1000)
-                        .position($scope.getToastPosition())
-                    );
-                    window.location = window.location.href.split('#')[0] + '#/meals';
+                	if(data.errorList == []) {
+	                    $mdToast.show(
+	                        $mdToast.simple()
+	                        .content('Meal Added!')
+	                        .hideDelay(1000)
+	                        .position($scope.getToastPosition())
+	                    );
+	                    window.location = window.location.href.split('#')[0] + '#/meals';
+                	} else {
+                		var alert = $mdDialog.alert()
+                        .parent(angular.element(document.body))
+                        .title('Invalid data error')
+                        .content(data.errorList)
+                        .ariaLabel('Adding a meal server error')
+                        .ok('Okay')
+                        .targetEvent(ev);
+                    
+	                    $mdDialog.show(alert).then(function () {
+	                        // do nothing
+	                    });
+                	}
                 })
                 .error(function (data, status, headers, config) {
                     var alert = $mdDialog.alert()
