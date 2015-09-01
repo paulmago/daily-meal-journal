@@ -221,10 +221,14 @@ String json = "";
     private static boolean populateJournalsJson(JSONArray jsonList) throws Exception {
         boolean succesful = false;
         for (int i = 0, count = jsonList.length(); i < count; i++) {
+            double totalCalories = 0;
             JSONArray journals = jsonList.getJSONObject(i).getJSONArray("journals");
             for (int j = 0, jCount = journals.length(); j < jCount; j++) {
-                populateJournalJsonWithMeals(journals.getJSONObject(j));
+                JSONObject obj = journals.getJSONObject(j);
+                populateJournalJsonWithMeals(obj);
+                totalCalories += (obj.getDouble("calories") * obj.getInt("quantity"));
             }
+            jsonList.getJSONObject(i).put("totalCalories", totalCalories);
         }
         return succesful;
     }
