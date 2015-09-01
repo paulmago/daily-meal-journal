@@ -21,13 +21,14 @@ import team.dailymealjournal.validator.JSONValidators;
 /**
  * Service used to handle meal transactions.
  * @author Kim Agustin
- * @version 0.05
+ * @version 0.06
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
  * [08/07/2015] 0.02 – Kim Agustin – Migration to slim3_1.0.16.
  * [08/07/2015] 0.03 – Kim Agustin – Merged CRUD controllers into one.
  * [08/31/2015] 0.04 – Kim Agustin – Added validation support.
  * [08/31/2015] 0.05 – Kim Agustin – Restructured controller flow.
+ * [09/01/2015] 0.06 – Miguel Victor Remulta – Added documentation.
  */
 public class MealsController extends Controller {
     
@@ -73,6 +74,10 @@ public class MealsController extends Controller {
         return null;
     }
     
+    /**
+     * Method to perform if request is GET.
+     * @return String - resulting JSON string.
+     */
     private String performGet() {
         String json = "";
         JSONValidators validators = new JSONValidators(this.request);
@@ -104,6 +109,10 @@ public class MealsController extends Controller {
         return json;
     }
     
+    /**
+     * Method to perform if request is DELETE.
+     * @return String - resulting JSON string.
+     */
     private String performDelete() {
         String json = "";
         JSONValidators validators = new JSONValidators(this.request);
@@ -122,6 +131,10 @@ public class MealsController extends Controller {
         return json;
     }
     
+    /**
+     * Method to perform if request is POST.
+     * @return String - resulting JSON string.
+     */
     private String performPost() {
         String json = "";
         JSONObject mealJson = null;
@@ -154,6 +167,10 @@ public class MealsController extends Controller {
         return json;
     }
     
+    /**
+     * Method to perform if request is PUT.
+     * @return String - resulting JSON string.
+     */
     private String performPut() {
         String json = "";
         JSONObject mealJson = null;
