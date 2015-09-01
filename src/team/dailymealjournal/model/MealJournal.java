@@ -12,10 +12,11 @@ import org.slim3.datastore.json.Json;
 /**
  * Model for individual meal journal.
  * @author Kim Agustin
- * @version 0.02
+ * @version 0.03
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
  * [08/31/2015] 0.02 – Kim Agustin – Added documentation.
+ * [09/01/2015] 0.03 – Kim Agustin – Added JSON ignore to journal reference.
  */
 @Model(schemaVersion = 1)
 public class MealJournal implements Serializable {
@@ -58,6 +59,7 @@ public class MealJournal implements Serializable {
      * Journal reference - reference to parent entity.
      */
     @Attribute(persistent = true)
+    @Json(ignore = true)
     private ModelRef<Journal> journalRef = new ModelRef<Journal>(Journal.class);
  
     /**
