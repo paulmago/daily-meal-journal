@@ -218,17 +218,12 @@
 		     keys : Object.keys
 		  }
 		})
-        .controller('journalController', ['$scope', '$http', 'meals', function ($scope, $http, meals) {
+        .controller('journalController', ['$scope', '$http', function ($scope, $http) {
             // getting journals
             $http
-                .get('test/journals.json')
+                .get('/journals')
                 .success(function (response) {
-                	var journals = response.journals;
-                    var groupedMeals = meals.groupMeals(journals);
-                    
-                    $scope.journals = journals;
-                    $scope.groupedMeals = groupedMeals;
-                    $scope.dates = groupedMeals.keys();
+                    $scope.journals = response;
                 });
 
             $scope.openJournal = function (journal) {
