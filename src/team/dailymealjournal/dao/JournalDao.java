@@ -57,6 +57,7 @@ public class JournalDao {
      * Method used to retrieve list of Journals.
      * @return List<Journal> - list of Journals.
      */
+    @SuppressWarnings("unchecked")
     public List<Journal> getAllJournals() {
         List<Journal> journals = (List<Journal>) Memcache.get("journals");
         if (null == journals) {
