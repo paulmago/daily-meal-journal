@@ -7,7 +7,11 @@ public class UserController extends Controller {
 
     @Override
     protected Navigation run() throws Exception {
+<<<<<<< HEAD
         return redirect("/user/journals");
+=======
+        return forward("meal_journal.jsp");
+>>>>>>> migzisreallywewwhat/integrated
     }
 
 }

@@ -13,6 +13,10 @@ import org.slim3.datastore.FilterCriterion;
 import team.dailymealjournal.meta.MealJournalMeta;
 import team.dailymealjournal.model.Journal;
 import team.dailymealjournal.model.MealJournal;
+<<<<<<< HEAD
+=======
+import team.dailymealjournal.service.JournalService;
+>>>>>>> migzisreallywewwhat/integrated
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.Transaction;
@@ -20,14 +24,26 @@ import com.google.appengine.api.datastore.Transaction;
 /**
 * Dao used to access the datastore for mealJournal transactions.s
 * @author Kim Agustin
+<<<<<<< HEAD
 * @version 0.01
 * Version History
 * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
+=======
+* @version 0.03
+* Version History
+* [07/28/2015] 0.01 – Kim Agustin – Initial codes.
+* [08/30/2015] 0.02 – Kim Agustin – Updated addMealJournal algorithm.
+* [08/30/2015] 0.03 – Kim Agustin – Changed deleteMealJournal into cascading.
+>>>>>>> migzisreallywewwhat/integrated
 */
 public class MealJournalDao {
 
     /**
      * Method used to save a mealJournal.
+<<<<<<< HEAD
+=======
+     * @param JournalModel - Today's date, if already in datastore.
+>>>>>>> migzisreallywewwhat/integrated
      * @param MealJournalModel - MealJournal to be saved.
      * @return Boolean - true, if mealJournal is saved; otherwise, false.
      */
@@ -35,7 +51,19 @@ public class MealJournalDao {
         boolean result = true;
         try {
             Transaction tx = Datastore.beginTransaction();
+<<<<<<< HEAD
             //Manually allocate key
+=======
+            if (null == journalModel) {
+                // if first entry for the day, create new journal
+                Key parentKey = Datastore.allocateId(Journal.class);
+                journalModel = new Journal();
+                journalModel.setKey(parentKey);
+                journalModel.setJournalId(parentKey.getId());
+                journalModel.setDateCreated(JournalService.getCurrentDate());
+            }
+            // Manually allocate key
+>>>>>>> migzisreallywewwhat/integrated
             Key key = Datastore.allocateId(journalModel.getKey(), MealJournal.class);
             mealJournalModel.setKey(key);
             mealJournalModel.setMealJournalId(key.getId());
@@ -107,9 +135,26 @@ public class MealJournalDao {
 
         try {
             MealJournal originalMealJournalModel = Datastore.query(meta).filter(mainFilter).asSingle();
+<<<<<<< HEAD
             if (originalMealJournalModel != null) {
                 Transaction tx = Datastore.beginTransaction();
                 Datastore.delete(originalMealJournalModel.getKey());
+=======
+                        
+            if (originalMealJournalModel != null) {
+                // find out if parent should be deleted or not
+                boolean deleteAll = true;
+                Journal journal = new JournalService().getJournal(originalMealJournalModel.getKey().getParent().getId());
+                if (journal.getMealJournalListRef().getModelList().size() > 1) {
+                    deleteAll = false;
+                }
+                
+                Transaction tx = Datastore.beginTransaction();
+                if (deleteAll)
+                    Datastore.deleteAll(originalMealJournalModel.getKey().getParent());
+                else
+                    Datastore.delete(originalMealJournalModel.getKey());
+>>>>>>> migzisreallywewwhat/integrated
                 tx.commit();
             } else {
                 result = false;

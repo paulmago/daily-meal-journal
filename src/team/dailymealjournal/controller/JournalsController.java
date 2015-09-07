@@ -18,6 +18,10 @@ import org.slim3.repackaged.org.json.JSONObject;
 import team.dailymealjournal.dto.MealJournalDto;
 import team.dailymealjournal.model.Journal;
 import team.dailymealjournal.model.Meal;
+<<<<<<< HEAD
+=======
+import team.dailymealjournal.model.MealJournal;
+>>>>>>> migzisreallywewwhat/integrated
 import team.dailymealjournal.meta.MealJournalMeta;
 import team.dailymealjournal.service.JournalService;
 import team.dailymealjournal.service.MealJournalService;
@@ -26,11 +30,20 @@ import team.dailymealjournal.service.MealService;
 /**
  * Service used to handle journal & meal journal transactions.
  * @author Kim Agustin
+<<<<<<< HEAD
  * @version 0.01
  * Version History
  * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
  * [08/07/2015] 0.02 – Kim Agustin – Refactored controller to handle meal journal transactions (GET)
  * [08/08/2015] 0.02 – Kim Agustin – Added POST, PUT, DELETE methods
+=======
+ * @version 0.04
+ * Version History
+ * [07/28/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/07/2015] 0.02 – Kim Agustin – Refactored controller to handle meal journal transactions (GET)
+ * [08/08/2015] 0.03 – Kim Agustin – Added POST, PUT, DELETE methods
+ * [08/17/2015] 0.04 – Kim Agustin – Fixed GET by meal journal ID
+>>>>>>> migzisreallywewwhat/integrated
  */
 public class JournalsController extends Controller {
     
@@ -55,9 +68,18 @@ public class JournalsController extends Controller {
         if (isGet()) {
             if(null != requestScope("id")) {
                 long id = asLong("id");
+<<<<<<< HEAD
                 Journal journal = journalService.getJournal(id);
                 if (null != journal)
                     json = journalToJson(journal).toString();
+=======
+                MealJournal mealJournal = mealJournalService.getMealJournal(id);
+                if (null != mealJournal) {
+                    JSONObject mealJournalJson = new JSONObject(MealJournalMeta.get().modelToJson(mealJournal));
+                    populateJournalJsonWithMeals(mealJournalJson);
+                    json = mealJournalJson.toString();
+                }
+>>>>>>> migzisreallywewwhat/integrated
             }
             else {
                 List<Journal> journalList = journalService.getJournalList();
@@ -118,6 +140,7 @@ public class JournalsController extends Controller {
         return jsonList;
     }
     
+<<<<<<< HEAD
     private static JSONObject journalToJson(Journal journal) throws Exception {
         JSONObject json = new JSONObject();
         Calendar calendar = Calendar.getInstance();
@@ -129,6 +152,9 @@ public class JournalsController extends Controller {
     }
     
     private static boolean populateJournalsJson(JSONArray jsonList) throws Exception{
+=======
+    private static boolean populateJournalsJson(JSONArray jsonList) throws Exception {
+>>>>>>> migzisreallywewwhat/integrated
         boolean succesful = false;
         for (int i = 0, count = jsonList.length(); i < count; i++) {
             JSONArray journals = jsonList.getJSONObject(i).getJSONArray("journals");
@@ -139,7 +165,11 @@ public class JournalsController extends Controller {
         return succesful;
     }
     
+<<<<<<< HEAD
     private static boolean populateJournalJsonWithMeals(JSONObject journal) throws Exception{
+=======
+    private static boolean populateJournalJsonWithMeals(JSONObject journal) throws Exception {
+>>>>>>> migzisreallywewwhat/integrated
         boolean succesful = false;
         MealService mealService = new MealService();
         Meal meal = mealService.getMeal(journal.getLong("mealId"));

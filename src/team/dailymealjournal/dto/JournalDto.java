@@ -5,7 +5,11 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.dto;
 
+<<<<<<< HEAD
 import java.util.Calendar;
+=======
+import java.util.ArrayList;
+>>>>>>> migzisreallywewwhat/integrated
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +26,11 @@ public class JournalDto {
     /**
      * List of errors.
      */
+<<<<<<< HEAD
     private List<String> errorList;
+=======
+    private List<String> errorList = new ArrayList<String>();
+>>>>>>> migzisreallywewwhat/integrated
     
     /**
      * Journal ID.
@@ -33,6 +41,7 @@ public class JournalDto {
      * Date journal was created.
      */
     private Date dateCreated;
+<<<<<<< HEAD
         
     public JournalDto () {
         Calendar calendar = Calendar.getInstance();
@@ -42,6 +51,8 @@ public class JournalDto {
         calendar.set(Calendar.MILLISECOND, 0);
         this.dateCreated = calendar.getTime();
     }
+=======
+>>>>>>> migzisreallywewwhat/integrated
     
     /**
      * Retrieve errorList

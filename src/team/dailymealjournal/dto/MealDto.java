@@ -5,6 +5,7 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.dto;
 
+<<<<<<< HEAD
 import java.util.List;
 
 /**
@@ -14,13 +15,29 @@ import java.util.List;
  * @version 0.01
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * DTO used to store a single meal for admin side operations.
+ * @author Kim Agustin
+ * @version 0.02
+ * Version History
+ * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
+ * [08/31/2015] 0.02 – Kim Agustin – Changed calories from int to double.
+>>>>>>> migzisreallywewwhat/integrated
  */
 public class MealDto {
 
     /**
      * List of errors.
      */
+<<<<<<< HEAD
     private List<String> errorList;
+=======
+    private List<String> errorList = new ArrayList<String>();
+>>>>>>> migzisreallywewwhat/integrated
     
     /**
      * Meal ID.
@@ -40,7 +57,11 @@ public class MealDto {
     /**
      * Quantitative measure of meal calories.
      */
+<<<<<<< HEAD
     private int calories;
+=======
+    private double calories;
+>>>>>>> migzisreallywewwhat/integrated
     
     /**
      * Default quantity of meal serving.
@@ -115,7 +136,11 @@ public class MealDto {
      * Retrieve calories
      * @return the calories
      */
+<<<<<<< HEAD
     public int getCalories() {
+=======
+    public double getCalories() {
+>>>>>>> migzisreallywewwhat/integrated
         return calories;
     }
     
@@ -123,7 +148,11 @@ public class MealDto {
      * Set calories
      * @param calories the calories to set
      */
+<<<<<<< HEAD
     public void setCalories(int calories) {
+=======
+    public void setCalories(double calories) {
+>>>>>>> migzisreallywewwhat/integrated
         this.calories = calories;
     }
     

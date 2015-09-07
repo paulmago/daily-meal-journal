@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
     <head>
@@ -102,3 +103,41 @@
         <script src="../js/user/meals.js"></script>
     </body>
 </html>
+=======
+<div layout="column" flex>
+
+    <md-toolbar class="md-tall" md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+                <md-icon aria-label="Menu" md-svg-icon="navigation:menu"></md-icon>
+            </md-button>
+            <input id="search-box" placeholder="Search here" ng-model="search" class="toolbar-search-box" ng-hide="searchBoxHidden" ng-blur="searchMeals()" type="text" flex>
+            <span flex ng-hide="!searchBoxHidden"></span>
+            <md-button ng-click="searchMeals()" class="md-icon-button" aria-label="Search">
+                <md-icon md-svg-icon="action:search"></md-icon>
+            </md-button>
+            <!-- <md-button ng-click="toggleOverflow()" class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="navigation:more_vert"></md-icon>
+            </md-button> -->
+        </div>
+
+        <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
+            <span class="md-flex">Meals</span>
+        </h2>
+    </md-toolbar>
+
+    <md-list>
+        <md-list-item ng-click="openMeal(meal)" class="md-2-line" ng-repeat="meal in filteredMeals=(meals | filter:search)">
+            <img ng-src="{{ meal.iconUrl }}" class="md-avatar" alt="" />
+            <div class="md-list-item-text">
+                <h3>{{ meal.name }}</h3>
+                <p>{{ meal.calories }} calories per {{ meal.defaultQuantity + ' ' + meal.unit }}</p>
+            </div>
+        </md-list-item>
+        <md-list-item ng-hide="filteredMeals.length">
+            <p>No results found.</p>
+        </md-list-item>
+        <md-divider></md-divider>
+    </md-list>
+</div>
+>>>>>>> migzisreallywewwhat/integrated

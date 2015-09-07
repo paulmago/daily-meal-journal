@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /** fonts */
 body {
   font-size: 9pt;
@@ -26,4 +27,34 @@ textarea {
 
 .gwt-SplitLayoutPanel-HDragger {
   cursor: col-resize;
+=======
+/** fonts */
+body {
+  font-size: 9pt;
+  line-height: 1.2;
+}
+
+select,input,button,textarea {
+  font-size: 100%;
+  line-height: 1.2;
+}
+
+table {
+  font-size: 100%;
+  line-height: 1.2;
+}
+
+textarea {
+  font-size: 100%;
+  line-height: 1.2;
+}
+
+/* ktrwjr-icon */
+.ui-icon-empty {
+  background-position: -240px 0;
+}
+
+.gwt-SplitLayoutPanel-HDragger {
+  cursor: col-resize;
+>>>>>>> migzisreallywewwhat/integrated
 }

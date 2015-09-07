@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @font-face {
     font-family: 'Roboto'; /*a name to be used later*/
     src: url('fonts/Roboto-Regular.ttf'); /*URL to font*/
@@ -23,3 +24,59 @@ body {
 .container {
     background-color: blue;
 }
+=======
+.md-toolbar-tools {
+    font-size: inherit;
+    font-weight: 500;
+    margin: inherit;
+}
+
+.sidenav-header {
+    background-color: #3F51B5;
+}
+
+.sidenav-header img {
+    display: block;
+    width: 80%;
+    margin: 20px auto 0;
+    fill: #fff;
+}
+
+.sidenav-header h1 {
+    color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+    font-weight: normal;
+}
+
+.toolbar-search-box {
+    border: none;
+    background: none;
+    color: #fff;
+    outline: none;
+}
+
+.padding-big {
+    padding: 20px 40px;
+}
+
+.below-toolbar-img {
+    height: 200px;
+    overflow: hidden;
+}
+
+.below-toolbar-img img {
+    margin-top: -10%;
+    width: 100%;
+}
+
+.subheader {
+    text-align: center;
+    color: #ccc;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+
+.md-button.md-fab.md-fab-bottom-right {
+      position: fixed; 
+}
+>>>>>>> migzisreallywewwhat/integrated

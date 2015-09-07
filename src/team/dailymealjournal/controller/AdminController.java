@@ -7,7 +7,11 @@ public class AdminController extends Controller {
 
     @Override
     protected Navigation run() throws Exception {
+<<<<<<< HEAD
         return redirect("/admin/meals");
+=======
+        return forward("meal_management.jsp");
+>>>>>>> migzisreallywewwhat/integrated
     }
     
 }
