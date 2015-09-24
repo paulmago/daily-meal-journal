@@ -1,6 +1,6 @@
 <div layout="column" flex>
 
-    <!-- The toolbar, because it's beautiful -->
+    <!-- Toolbar -->
     <md-toolbar class="md-tall" md-scroll-shrink>
         <div class="md-toolbar-tools">
             <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button">
@@ -21,12 +21,12 @@
         </h1>
     </md-toolbar>
 
+    <!-- Content -->
     <md-content>
-        <!-- The actual list -->
         <md-list ng-show="searchBoxHidden || !search.length">
-            <md-subheader ng-repeat-start="timestamp in Utils.keys(groupedMeals) | orderBy:timestamp">{{ timestamp | date:"MMMM d" }}<span style="float: right;">{{ groupedMeals[timestamp].totalCalories }} calorie(s)</span>
+            <md-subheader ng-repeat-start="journal in journals | orderBy:journal.dateCreated">{{ journal.dateCreated | date:"MMMM d" }}<span style="float: right;">{{ journal.totalCalories }} calorie(s)</span>
             </md-subheader>
-            <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in groupedMeals[timestamp] | orderBy: meal.dateCreated">
+            <md-list-item ng-click="openJournal(meal)" class="md-2-line" ng-repeat="meal in journal.journals">
                 <img ng-src="{{ meal.iconUrl }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text">
                     <h3>{{ meal.name }}</h3>

@@ -9,7 +9,7 @@ public class JournalsControllerTest extends ControllerTestCase {
 
     @Test
     public void run() throws Exception {
-        tester.start("/journal");
+        tester.start("/journals");
         JournalsController controller = tester.getController();
         assertThat(controller, is(notNullValue()));
         assertThat(tester.isRedirect(), is(false));

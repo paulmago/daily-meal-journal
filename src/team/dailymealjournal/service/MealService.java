@@ -5,7 +5,6 @@
  * --------------------------------------------------------------------------- */
 package team.dailymealjournal.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import team.dailymealjournal.dao.MealDao;
@@ -15,10 +14,11 @@ import team.dailymealjournal.model.Meal;
 /**
  * Service used to handle meal transactions.
  * @author Kim Agustin
- * @version 0.01
+ * @version 0.03
  * Version History
  * [07/27/2015] 0.01 – Kim Agustin – Initial codes.
- * [08/07/2015] 0.01 – Kim Agustin – Fixed edit service.
+ * [08/07/2015] 0.02 – Kim Agustin – Fixed edit service.
+ * [08/31/2015] 0.03 – Kim Agustin – Changed message on DAO operation failure.
  */
 public class MealService {
 
@@ -37,8 +37,7 @@ public class MealService {
         Meal meal = setModelValues(input);
 
         if(!this.dao.addMeal(meal)) {
-            input.setErrorList(new ArrayList<String>());
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
@@ -71,8 +70,7 @@ public class MealService {
         meal.setMealId(input.getMealId());
 
         if(!this.dao.editMeal(meal)) {
-            input.setErrorList(new ArrayList<String>());
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
@@ -88,13 +86,17 @@ public class MealService {
         meal.setMealId(input.getMealId());
 
         if(!this.dao.deleteMeal(meal)) {
-            input.setErrorList(new ArrayList<String>());
-            input.getErrorList().add("database error!");
+            input.getErrorList().add("An unexpected error occured!");
         }
 
         return input;
     }
     
+    /**
+     * Method used to transfer values from DTO to model.
+     * @param input - container of values from request.
+     * @return Meal - model with all values from DTO.
+     */
     private Meal setModelValues(MealDto input) {
         Meal meal = new Meal();
         meal.setName(input.getName());
